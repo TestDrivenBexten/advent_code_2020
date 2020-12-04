@@ -14,4 +14,9 @@ class PuzzleInputReader {
         }
         return intList;
     }
+
+    public static List<String> readStringListFromFile(Path path)
+            throws Exception {
+        return Files.readAllLines(path);
+    }
 }
