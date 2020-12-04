@@ -1,3 +1,4 @@
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,5 +21,13 @@ public class Day01Tests {
         var expenseList = List.of(1721,100,1920,1456);
         var result = Day01.productOfDaysAddingTo2020(expenseList);
         assertEquals(192000,result);
+    }
+
+    @Test
+    void Print_Part_1_Answer_To_Console() throws Exception{
+        var path = Paths.get("src/test/java/day_01/day_01_input.txt");
+        List<Integer> intList = PuzzleInputReader.readIntListFromFile(path);
+        var result = Day01.productOfDaysAddingTo2020(intList);
+        System.out.println(result);
     }
 }
