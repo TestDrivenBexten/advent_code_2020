@@ -13,4 +13,12 @@ public class Day01Tests {
         var result = Day01.productOfDaysAddingTo2020(expenseList);
         assertEquals(514579,result);
     }
+
+    @Test
+    @DisplayName("List with 100 and 1920 should return 192000")
+    void Second_Product_Test(){
+        var expenseList = List.of(1721,100,1920,1456);
+        var result = Day01.productOfDaysAddingTo2020(expenseList);
+        assertEquals(192000,result);
+    }
 }
