@@ -23,7 +23,7 @@ public class Day02Tests {
     @Test
     @DisplayName("Password \"ccccccccc\" should be valid for 2-9 'c' characters")
     void Multiple_C_Test(){
-        var isValid = Day02.isPasswordValid(1,3,'c',"ccccccccc");
+        var isValid = Day02.isPasswordValid(2,9,'c',"ccccccccc");
         assertTrue(isValid);
     }
 }

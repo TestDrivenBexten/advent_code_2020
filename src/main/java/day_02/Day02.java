@@ -4,6 +4,8 @@ public class Day02 {
         int characterCount = password.chars()
             .reduce(0,
                 (a, b) -> a + ((char) b == character ? 1 : 0));
+        System.out.println(password);
+        System.out.println(characterCount);
         return min <= characterCount && characterCount <= max;
     }
 }
