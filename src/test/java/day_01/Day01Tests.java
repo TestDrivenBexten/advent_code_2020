@@ -38,4 +38,12 @@ public class Day01Tests {
         var result = Day01.productOf3DaysAddingTo2020(expenseList);
         assertEquals(241861950,result);
     }
+
+    @Test
+    void Print_Part_2_Answer_To_Console() throws Exception{
+        var path = Paths.get("src/test/java/day_01/day_01_input.txt");
+        List<Integer> intList = PuzzleInputReader.readIntListFromFile(path);
+        var result = Day01.productOf3DaysAddingTo2020(intList);
+        System.out.println(result);
+    }
 }
