@@ -10,8 +10,9 @@ public class Passport {
     private String passportId;
     private int countryId;
 
-    private Passport(int birthYear, String eyeColor){
+    private Passport(int birthYear, int issueYear, String eyeColor){
         this.birthYear = birthYear;
+        this.issueYear = issueYear;
         this.eyeColor = eyeColor;
     }
 
@@ -32,13 +33,16 @@ public class Passport {
             switch(passportKey){
                 case "byr":
                     inputBirthYear = Integer.parseInt(passportValue);
+                    break; 
+                case "iyr":
+                    inputIssueYear = Integer.parseInt(passportValue);
                     break;
                 case "ecl":
                     inputEyeColor = passportValue;
                     break;
             }
         }
-        return new Passport(inputBirthYear, inputEyeColor);
+        return new Passport(inputBirthYear, inputIssueYear, inputEyeColor);
     }
 
     /* Getters */
