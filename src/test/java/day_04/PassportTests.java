@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.awt.Color;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class PassportTests {
     @Test
@@ -63,5 +65,34 @@ public class PassportTests {
                             "iyr:2011 ecl:brn hgt:59in";
         var passport = Passport.readPassportFromBatch(batchInput);
         assertFalse(passport.isValid());
+    }
+       
+    @Test
+    @DisplayName("Should count x valid passports from batch")
+    void Batch_Valid_Passport_Test() throws Exception{
+        int validPassportCount = 0;
+        var path = Paths.get("src/test/java/day_04/batch_input.txt");
+        List<String> lineList = PuzzleInputReader.readStringListFromFile(path);
+
+        String batchPassport = "";
+        var lineIterator = lineList.iterator();
+        while(lineIterator.hasNext()){
+            var line = lineIterator.next();
+            if(line.isEmpty()){
+                var passport = Passport.readPassportFromBatch(batchPassport);
+                if(passport.isValid()){
+                    validPassportCount++;
+                }
+                batchPassport = "";
+            }else{
+                batchPassport += line + "\n";
+            }
+        }
+
+        assertEquals(0,validPassportCount);
+        // String batchInput = "hcl:#cfa07d eyr:2025 pid:166559648\n" +
+        //                     "iyr:2011 ecl:brn hgt:59in";
+        // var passport = Passport.readPassportFromBatch(batchInput);
+        // assertFalse(passport.isValid());
     }
 }
