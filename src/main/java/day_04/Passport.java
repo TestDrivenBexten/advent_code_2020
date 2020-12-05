@@ -12,12 +12,14 @@ public class Passport {
 
     private Passport(int birthYear, int issueYear,
             int expirationYear, int heightInCentimeters,
-            String eyeColor, int countryId){
+            String eyeColor, String passportId,
+            int countryId){
         this.birthYear = birthYear;
         this.issueYear = issueYear;
         this.expirationYear = expirationYear;
         this.heightInCentimeters = heightInCentimeters;
         this.eyeColor = eyeColor;
+        this.passportId = passportId;
         this.countryId = countryId;
     }
 
@@ -52,6 +54,9 @@ public class Passport {
                 case "ecl":
                     inputEyeColor = passportValue;
                     break;
+                case "pid":
+                    inputPassportId = passportValue;
+                    break;
                 case "cid":
                     inputCountryId = Integer.parseInt(passportValue);
                     break;
@@ -59,7 +64,8 @@ public class Passport {
         }
         return new Passport(inputBirthYear, inputIssueYear,
             inputExpirationYear, inputHeightInCentimeters,
-            inputEyeColor, inputCountryId);
+            inputEyeColor, inputPassportId,
+            inputCountryId);
     }
 
     /* Getters */
