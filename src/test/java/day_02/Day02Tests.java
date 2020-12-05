@@ -81,4 +81,30 @@ public class Day02Tests {
         var isValid = Day02.isSecondPasswordValid(2,9,'c',"ccccccccc");
         assertFalse(isValid);
     }
+    @Test
+    @DisplayName("Should count 354 valid passwords from puzzle input")
+    void Print_To_Console_P2() throws Exception{
+        int count = 0;
+        Pattern r = Pattern.compile("(\\d+)-(\\d+)\\s([a-z]):\\s([a-z]+)");
+
+        var path = Paths.get("src/test/java/day_02/day_02_input.txt");
+        List<String> passwordList = PuzzleInputReader.readStringListFromFile(path);
+        var passwordIterator = passwordList.listIterator();
+        while(passwordIterator.hasNext()){
+            String rawPassword = passwordIterator.next();
+            Matcher m = r.matcher(rawPassword);
+            if(m.find()){
+                int min = Integer.parseInt(m.group(1));
+                int max = Integer.parseInt(m.group(2));
+                char character = m.group(3).charAt(0);
+                String password = m.group(4);
+
+                var isValid = Day02.isSecondPasswordValid(min,max,character,password);
+                if(isValid){
+                    count++;
+                }
+            }
+        }
+        assertEquals(354,count);
+    }
 }
