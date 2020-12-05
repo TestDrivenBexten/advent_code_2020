@@ -33,7 +33,7 @@ public class Day03Tests {
             {false,true},
             {true,false},
             {false,true},
-            {false,false}
+            {true,false}
         };
         var terrain = new TreeTerrain(treeArray);
         var collisionCount = terrain.calculateCollisionsPerSlope(1,1);
@@ -80,6 +80,6 @@ public class Day03Tests {
 
         var treeTerrain = new TreeTerrain(treeArray);
         int collisionCount = treeTerrain.calculateCollisionsPerSlope(3, 1);
-        assertEquals(8,collisionCount);
+        assertEquals(250,collisionCount);
     }
 }

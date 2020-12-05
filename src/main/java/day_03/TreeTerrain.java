@@ -11,13 +11,13 @@ class TreeTerrain{
         int horizontalPosition = 0;
         int verticalPosition = 0;
 
-        while(verticalPosition < treeTerrain.length &&
-                horizontalPosition < treeTerrain[0].length){
+        while(verticalPosition < treeTerrain.length){
             if(treeTerrain[verticalPosition][horizontalPosition]){
                 collisionCount++;
             }
             horizontalPosition += right;
             verticalPosition += down;
+            horizontalPosition %= treeTerrain[0].length;
         }
         return collisionCount;
     }
