@@ -11,8 +11,8 @@ class TreeTerrain{
         int horizontalPosition = 0;
         int verticalPosition = 0;
 
-        while(horizontalPosition < treeTerrain.length &&
-                verticalPosition < treeTerrain[0].length){
+        while(verticalPosition < treeTerrain.length &&
+                horizontalPosition < treeTerrain[0].length){
             if(treeTerrain[verticalPosition][horizontalPosition]){
                 collisionCount++;
             }

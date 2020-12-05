@@ -52,7 +52,7 @@ public class Day03Tests {
         int terrainWidth = treeList.get(0).length();
         int terrainHeight = treeList.size();
 
-        boolean[][] treeArray = new boolean[terrainWidth][terrainHeight];
+        boolean[][] treeArray = new boolean[terrainHeight][terrainWidth];
         for(int row = 0; row < terrainHeight; row++){
             String treeRow = treeList.get(row);
             for(int col = 0; col < terrainWidth; col++){
@@ -65,6 +65,6 @@ public class Day03Tests {
 
         var treeTerrain = new TreeTerrain(treeArray);
         int collisionCount = treeTerrain.calculateCollisionsPerSlope(3, 1);
-        // TODO collision assertion
+        assertEquals(8,collisionCount);
     }
 }
