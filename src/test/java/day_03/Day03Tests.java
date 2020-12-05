@@ -21,4 +21,13 @@ public class Day03Tests {
         var collisionCount = terrain.calculateCollisionsPerSlope(1,1);
         assertEquals(2,collisionCount);
     }
+
+    @Test
+    @DisplayName("Terrain with tree in 2,2 should have single collisions for slope 1-1")
+    void Single_Collision_For_Large_Terrain_Test(){
+        boolean treeArray[][] = {{false,false,false},{false,false,false},{false,false,true}};
+        var terrain = new TreeTerrain(treeArray);
+        var collisionCount = terrain.calculateCollisionsPerSlope(1,1);
+        assertEquals(1,collisionCount);
+    }
 }
