@@ -8,8 +8,16 @@ class TreeTerrain{
     public int calculateCollisionsPerSlope(int right, int down){
         int collisionCount = 0;
 
-        if(treeTerrain[right][down]){
-            collisionCount++;
+        int horizontalPosition = 0;
+        int verticalPosition = 0;
+
+        while(horizontalPosition < treeTerrain.length &&
+                verticalPosition < treeTerrain[0].length){
+            if(treeTerrain[horizontalPosition][verticalPosition]){
+                collisionCount++;
+            }
+            horizontalPosition += right;
+            verticalPosition += down;
         }
         return collisionCount;
     }
