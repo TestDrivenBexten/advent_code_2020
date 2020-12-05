@@ -24,6 +24,10 @@ public class Passport {
         this.countryId = countryId;
     }
 
+    public boolean isValid(){
+        return false;
+    }
+
     public static Passport readPassportFromBatch(String passportBatch){
         int inputBirthYear = 0;
         int inputIssueYear = 0;
