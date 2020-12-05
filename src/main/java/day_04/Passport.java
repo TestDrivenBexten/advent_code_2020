@@ -10,11 +10,29 @@ public class Passport {
     private String passportId;
     private int countryId;
 
-    private Passport(){}
+    private Passport(String eyeColor){
+        this.eyeColor = eyeColor;
+    }
 
     public static Passport readPassportFromBatch(String passportBatch){
+        int inputBirthYear;
+        int inputIssueYear;
+        int inputExpirationYear;
+        int inputHeightInCentimeters;
+        Color inputHairColor;
+        String inputEyeColor = "";
+        String inputPassportId = "";
+        int inputCountryId;
+
         String[] passportFieldArray = passportBatch.split("\\s");
-        return new Passport();
+        for(String passportField: passportFieldArray){
+            String passportKey = passportField.substring(0,3);
+            String passportValue = passportField.substring(4);
+            if(passportKey.equals("ecl")){
+                inputEyeColor = passportValue;
+            }
+        }
+        return new Passport(inputEyeColor);
     }
 
     /* Getters */
