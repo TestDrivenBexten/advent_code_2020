@@ -88,10 +88,6 @@ public class PassportTests {
             }
         }
 
-        assertEquals(0,validPassportCount);
-        // String batchInput = "hcl:#cfa07d eyr:2025 pid:166559648\n" +
-        //                     "iyr:2011 ecl:brn hgt:59in";
-        // var passport = Passport.readPassportFromBatch(batchInput);
-        // assertFalse(passport.isValid());
+        assertEquals(190,validPassportCount);
     }
 }

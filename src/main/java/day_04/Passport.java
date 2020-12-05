@@ -27,7 +27,7 @@ public class Passport {
         boolean areYearsValid = this.birthYear > 0 && this.issueYear > 0
             && this.expirationYear > 0;
         boolean arePhysicalTraitsValid = this.height > 0
-            && this.hairColor != null && !this.eyeColor.isEmpty();
+            && !this.hairColor.isEmpty() && !this.eyeColor.isEmpty();
         return areYearsValid && arePhysicalTraitsValid && !this.passportId.isEmpty();
     }
 
