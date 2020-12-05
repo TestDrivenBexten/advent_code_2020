@@ -13,7 +13,7 @@ class TreeTerrain{
 
         while(horizontalPosition < treeTerrain.length &&
                 verticalPosition < treeTerrain[0].length){
-            if(treeTerrain[horizontalPosition][verticalPosition]){
+            if(treeTerrain[verticalPosition][horizontalPosition]){
                 collisionCount++;
             }
             horizontalPosition += right;
