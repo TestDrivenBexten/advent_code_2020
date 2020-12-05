@@ -6,6 +6,11 @@ class TreeTerrain{
     }
 
     public int calculateCollisionsPerSlope(int right, int down){
-        return 0;
+        int collisionCount = 0;
+
+        if(treeTerrain[right][down]){
+            collisionCount++;
+        }
+        return collisionCount;
     }
 }
