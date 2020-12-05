@@ -13,6 +13,7 @@ public class Passport {
     private Passport(){}
 
     public static Passport readPassportFromBatch(String passportBatch){
+        String[] passportFieldArray = passportBatch.split("\\s");
         return new Passport();
     }
 
