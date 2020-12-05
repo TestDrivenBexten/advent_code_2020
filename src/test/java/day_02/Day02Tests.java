@@ -60,4 +60,25 @@ public class Day02Tests {
         }
         assertEquals(614,count);
     }
+
+    @Test
+    @DisplayName("New password \"abcde\" should be valid for 1-3 'a' characters")
+    void Second_Policy_Abcde_Test(){
+        var isValid = Day02.isSecondPasswordValid(1,3,'a',"abcde");
+        assertTrue(isValid);
+    }
+
+    @Test
+    @DisplayName("New password \"cdefg\" should not be valid for 1-3 'b' characters")
+    void Second_Policy_Cdefg_Test(){
+        var isValid = Day02.isSecondPasswordValid(1,3,'b',"cdefg");
+        assertFalse(isValid);
+    }
+
+    @Test
+    @DisplayName("Password \"ccccccccc\" should not be valid for 2-9 'c' characters")
+    void Second_Policy_Multiple_C_Test(){
+        var isValid = Day02.isSecondPasswordValid(2,9,'c',"ccccccccc");
+        assertFalse(isValid);
+    }
 }
