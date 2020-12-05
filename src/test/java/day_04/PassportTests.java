@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.awt.Color;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class PassportTests {
             () -> assertEquals(2017,passport.getIssueYear()),
             () -> assertEquals(2020,passport.getExpirationYear()),
             () -> assertEquals(183,passport.getHeight()),
-            () -> assertEquals(Color.decode("#fffffd"),passport.getHairColor()),
+            () -> assertEquals("#fffffd",passport.getHairColor()),
             () -> assertEquals("gry",passport.getEyeColor()),
             () -> assertEquals("860033327",passport.getPassportId()),
             () -> assertEquals(147,passport.getCountryId())

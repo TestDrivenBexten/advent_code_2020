@@ -1,18 +1,17 @@
-import java.awt.Color;
 
 public class Passport {
     private int birthYear;
     private int issueYear;
     private int expirationYear;
     private int height;
-    private Color hairColor;
+    private String hairColor;
     private String eyeColor;
     private String passportId;
     private int countryId;
 
     private Passport(int birthYear, int issueYear,
             int expirationYear, int height,
-            Color hairColor, String eyeColor,
+            String hairColor, String eyeColor,
             String passportId, int countryId){
         this.birthYear = birthYear;
         this.issueYear = issueYear;
@@ -37,7 +36,7 @@ public class Passport {
         int inputIssueYear = 0;
         int inputExpirationYear = 0;
         int inputHeight = 0;
-        Color inputHairColor = null;
+        String inputHairColor = "";
         String inputEyeColor = "";
         String inputPassportId = "";
         int inputCountryId = 0;
@@ -61,7 +60,7 @@ public class Passport {
                     inputHeight = Integer.parseInt(height);
                     break;
                 case "hcl":
-                    inputHairColor = Color.decode(passportValue);
+                    inputHairColor = passportValue;
                     break;
                 case "ecl":
                     inputEyeColor = passportValue;
@@ -97,7 +96,7 @@ public class Passport {
         return height;
     }
 
-    public Color getHairColor(){
+    public String getHairColor(){
         return hairColor;
     }
 
