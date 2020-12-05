@@ -25,7 +25,11 @@ public class Passport {
     }
 
     public boolean isValid(){
-        return false;
+        boolean areYearsValid = this.birthYear > 0 && this.issueYear > 0
+            && this.expirationYear > 0;
+        boolean arePhysicalTraitsValid = this.height > 0
+            && this.hairColor != null && !this.eyeColor.isEmpty();
+        return areYearsValid && arePhysicalTraitsValid && !this.passportId.isEmpty();
     }
 
     public static Passport readPassportFromBatch(String passportBatch){
