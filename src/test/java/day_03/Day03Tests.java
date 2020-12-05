@@ -59,7 +59,7 @@ public class Day03Tests {
     }
 
     @Test
-    @DisplayName("Should count x collisions on test terrain")
+    @DisplayName("Should count 250 collisions on test terrain")
     void Count_For_P1() throws Exception{
         var path = Paths.get("src/test/java/day_03/day_03_input.txt");
         List<String> treeList = PuzzleInputReader.readStringListFromFile(path);
@@ -81,5 +81,39 @@ public class Day03Tests {
         var treeTerrain = new TreeTerrain(treeArray);
         int collisionCount = treeTerrain.calculateCollisionsPerSlope(3, 1);
         assertEquals(250,collisionCount);
+    }
+
+    
+    @Test
+    @DisplayName("Should find product of five slope collions on test terrain")
+    void Count_For_P2() throws Exception{
+        var path = Paths.get("src/test/java/day_03/day_03_input.txt");
+        List<String> treeList = PuzzleInputReader.readStringListFromFile(path);
+
+        int terrainWidth = treeList.get(0).length();
+        int terrainHeight = treeList.size();
+
+        boolean[][] treeArray = new boolean[terrainHeight][terrainWidth];
+        for(int row = 0; row < terrainHeight; row++){
+            String treeRow = treeList.get(row);
+            for(int col = 0; col < terrainWidth; col++){
+                char treeChar = treeRow.charAt(col);
+                if(treeChar == '#'){
+                    treeArray[row][col] = true;
+                }
+            }
+        }
+
+        var treeTerrain = new TreeTerrain(treeArray);
+
+        int firstSlopeCount = treeTerrain.calculateCollisionsPerSlope(1, 1);
+        int secondSlopeCount = treeTerrain.calculateCollisionsPerSlope(3, 1);
+        int thirdSlopeCount = treeTerrain.calculateCollisionsPerSlope(5, 1);
+        int fourthSlopeCount = treeTerrain.calculateCollisionsPerSlope(7, 1);
+        int fifthSlopeCount = treeTerrain.calculateCollisionsPerSlope(1, 2);
+
+        int collisionProduct = firstSlopeCount * secondSlopeCount
+            * thirdSlopeCount * fourthSlopeCount * fifthSlopeCount;
+        assertEquals(1592662500,collisionProduct);
     }
 }
