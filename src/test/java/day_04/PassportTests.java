@@ -19,7 +19,7 @@ public class PassportTests {
             () -> assertEquals(1937,passport.getBirthYear()),
             () -> assertEquals(2017,passport.getIssueYear()),
             () -> assertEquals(2020,passport.getExpirationYear()),
-            () -> assertEquals(183,passport.getHeightInCentimeters()),
+            () -> assertEquals(183,passport.getHeight()),
             () -> assertEquals(Color.decode("#fffffd"),passport.getHairColor()),
             () -> assertEquals("gry",passport.getEyeColor()),
             () -> assertEquals("860033327",passport.getPassportId()),

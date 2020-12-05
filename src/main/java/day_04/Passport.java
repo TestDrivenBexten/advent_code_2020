@@ -4,20 +4,20 @@ public class Passport {
     private int birthYear;
     private int issueYear;
     private int expirationYear;
-    private int heightInCentimeters;
+    private int height;
     private Color hairColor;
     private String eyeColor;
     private String passportId;
     private int countryId;
 
     private Passport(int birthYear, int issueYear,
-            int expirationYear, int heightInCentimeters,
+            int expirationYear, int height,
             Color hairColor, String eyeColor,
             String passportId, int countryId){
         this.birthYear = birthYear;
         this.issueYear = issueYear;
         this.expirationYear = expirationYear;
-        this.heightInCentimeters = heightInCentimeters;
+        this.height = height;
         this.hairColor = hairColor;
         this.eyeColor = eyeColor;
         this.passportId = passportId;
@@ -32,7 +32,7 @@ public class Passport {
         int inputBirthYear = 0;
         int inputIssueYear = 0;
         int inputExpirationYear = 0;
-        int inputHeightInCentimeters = 0;
+        int inputHeight = 0;
         Color inputHairColor = null;
         String inputEyeColor = "";
         String inputPassportId = "";
@@ -54,7 +54,7 @@ public class Passport {
                     break;
                 case "hgt":
                     String height = passportValue.replaceAll("[a-z]","");
-                    inputHeightInCentimeters = Integer.parseInt(height);
+                    inputHeight = Integer.parseInt(height);
                     break;
                 case "hcl":
                     inputHairColor = Color.decode(passportValue);
@@ -71,7 +71,7 @@ public class Passport {
             }
         }
         return new Passport(inputBirthYear, inputIssueYear,
-            inputExpirationYear, inputHeightInCentimeters,
+            inputExpirationYear, inputHeight,
             inputHairColor, inputEyeColor,
             inputPassportId,inputCountryId);
     }
@@ -89,8 +89,8 @@ public class Passport {
         return expirationYear;
     }
 
-    public int getHeightInCentimeters(){
-        return heightInCentimeters;
+    public int getHeight(){
+        return height;
     }
 
     public Color getHairColor(){
