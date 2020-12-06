@@ -1,14 +1,18 @@
 package day_05;
 
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import util.PuzzleInputReader;
 
 class BinaryBoardingTests {
     @ParameterizedTest
@@ -27,4 +31,22 @@ class BinaryBoardingTests {
             arguments("BBFFBBFRLL",820)
         );
     }
+
+   @Test
+   @DisplayName("Should find maximum seat ID from boarding list")
+   void Find_Maximum_Seat_ID_Test() throws Exception{
+       var path = Paths.get("src/test/java/day_05/boarding_input.txt");
+       List<String> boardingList = PuzzleInputReader.readStringListFromFile(path);
+
+       int maximumSeatId = -1;
+       var boardingIterator = boardingList.iterator();
+       while(boardingIterator.hasNext()){
+           String boardingSpec = boardingIterator.next();
+           var binaryBoarding = BinaryBoarding.convertFromSpecification(boardingSpec);
+           int seatId = binaryBoarding.getSeatId();
+           maximumSeatId = maximumSeatId < binaryBoarding.getSeatId() ? seatId : maximumSeatId;
+       }
+
+       assertEquals(906,maximumSeatId);
+   }
 }
