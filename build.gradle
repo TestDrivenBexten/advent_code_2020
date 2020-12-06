@@ -1,5 +1,6 @@
 plugins {
-    id 'java'
+    id "java"
+    id "com.diffplug.spotless" version "5.8.2"
 }
 
 group 'org.bexten'
@@ -23,5 +24,11 @@ test {
     useJUnitPlatform()
     testLogging {
         events("failed")
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat()
     }
 }
