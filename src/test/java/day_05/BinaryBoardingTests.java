@@ -1,7 +1,9 @@
 package day_05;
 
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,5 +50,29 @@ class BinaryBoardingTests {
        }
 
        assertEquals(906,maximumSeatId);
+   }
+
+   @Test
+   @DisplayName("Should find missing seat ID from boarding list")
+   void Find_Missing_Seat_ID_Test() throws Exception{
+       var path = Paths.get("src/test/java/day_05/boarding_input.txt");
+       List<String> boardingList = PuzzleInputReader.readStringListFromFile(path);
+
+       List<BinaryBoarding> binaryList = boardingList.stream()
+            .map(BinaryBoarding::convertFromSpecification)
+            .sorted(Comparator.comparingInt(BinaryBoarding::getSeatId))
+            .collect(Collectors.toList());
+
+        int missingSeatId = 0;
+        for(int k = 0; k < binaryList.size() - 1; k++){
+            int firstSeatId = binaryList.get(k).getSeatId();
+            int secondSeatId = binaryList.get(k + 1).getSeatId();
+            if(secondSeatId == firstSeatId + 2){
+                missingSeatId = firstSeatId + 1;
+                break;
+            }
+        }
+
+       assertEquals(519,missingSeatId);
    }
 }
