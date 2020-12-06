@@ -33,7 +33,7 @@ public class Passport {
     }
 
     public boolean isValidWithFields(){
-        return false;
+        return isEyeColorValid();
     }
 
     public static Passport readPassportFromBatch(String passportBatch){
@@ -85,6 +85,12 @@ public class Passport {
     }
 
     private boolean isEyeColorValid(){
+        String[] eyeColorArray = {"amb","blu","brn","gry","grn","hzl","oth"};
+        for(String eyeColor: eyeColorArray){
+            if(eyeColor.equals(this.eyeColor)){
+                return true;
+            }
+        }
         return false;
     }
 
