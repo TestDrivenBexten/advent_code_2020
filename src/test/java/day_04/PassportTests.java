@@ -114,6 +114,31 @@ class PassportTests {
         assertTrue(passport.isValidWithFields());
    }
 
+   @Test
+   @DisplayName("Should count x valid passports with field validation from batch")
+   void Batch_Valid_Passport_With_Field_Validation_Test() throws Exception{
+       int validPassportCount = 0;
+       var path = Paths.get("src/test/java/day_04/batch_input.txt");
+       List<String> lineList = PuzzleInputReader.readStringListFromFile(path);
+
+       String batchPassport = "";
+       var lineIterator = lineList.iterator();
+       while(lineIterator.hasNext()){
+           var line = lineIterator.next();
+           if(line.isEmpty()){
+               var passport = Passport.readPassportFromBatch(batchPassport);
+               if(passport.isValidWithFields()){
+                   validPassportCount++;
+               }
+               batchPassport = "";
+           }else{
+               batchPassport += line + "\n";
+           }
+       }
+
+       assertEquals(190,validPassportCount);
+   }
+
    static Stream<String> invalidPassportProvider() {
        return Stream.of(
            "eyr:1972 cid:100\n"
