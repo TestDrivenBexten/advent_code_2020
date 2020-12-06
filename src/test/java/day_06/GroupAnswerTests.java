@@ -73,4 +73,25 @@ class GroupAnswerTests {
            arguments("b",1)
        );
    }
+
+   @Test
+   @DisplayName("Should count x unanimous answers from groups")
+   void Sum_Group_Unanimous_Answer_Test() throws Exception{
+       var path = Paths.get("src/test/java/day_06/group_answer_input.txt");
+       List<String> answerList = PuzzleInputReader.readStringListFromFile(path);
+
+       int totalCount = 0;
+       String groupAnswer = "";
+       for(String answer: answerList){
+           if(answer.isEmpty()){
+            int groupCount = GroupAnswer.calculateUnanimousGroupAnswerCount(groupAnswer);
+            totalCount += groupCount;
+            groupAnswer = "";
+           } else {
+               groupAnswer += answer + "\n";
+           }
+       }
+
+       assertEquals(3235,totalCount);
+   }
 }
