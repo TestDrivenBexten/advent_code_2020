@@ -1,3 +1,4 @@
+package day_02;
 
 public class Day02 {
     public static boolean isPasswordValid(int min, int max, char character, String password){

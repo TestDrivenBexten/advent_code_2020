@@ -1,9 +1,11 @@
+package day_02;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import util.PuzzleInputReader;
 
 import java.nio.file.Paths;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Day02Tests {
+class Day02Tests {
 
     @Test
     @DisplayName("Password \"abcde\" should be valid for 1-3 'a' characters")

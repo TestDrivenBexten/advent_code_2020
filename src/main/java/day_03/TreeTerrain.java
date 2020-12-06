@@ -1,5 +1,6 @@
+package day_03;
 
-class TreeTerrain{
+public class TreeTerrain{
     private boolean[][] treeTerrain;
     public TreeTerrain(boolean[][] treeTerrain){
         this.treeTerrain = treeTerrain;

@@ -1,3 +1,5 @@
+package day_04;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -5,11 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import util.PuzzleInputReader;
 
 import java.nio.file.Paths;
 import java.util.List;
 
-public class PassportTests {
+class PassportTests {
     @Test
     @DisplayName("Read complete passport from batch")
     void Load_Passport_From_Batch_Test(){
