@@ -1,5 +1,7 @@
 package day_06;
 
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,6 +12,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import util.PuzzleInputReader;
 
 class GroupAnswerTests {
 
@@ -30,4 +34,25 @@ class GroupAnswerTests {
             arguments("b",1)
         );
     }
+
+   @Test
+   @DisplayName("Should count x answers from groups")
+   void Sum_Group_Answer_Test() throws Exception{
+       var path = Paths.get("src/test/java/day_06/group_answer_input.txt");
+       List<String> answerList = PuzzleInputReader.readStringListFromFile(path);
+
+       int totalCount = 0;
+       String groupAnswer = "";
+       for(String answer: answerList){
+           if(answer.isEmpty()){
+            int groupCount = GroupAnswer.calculateGroupAnswerCount(groupAnswer);
+            totalCount += groupCount;
+            groupAnswer = "";
+           } else {
+               groupAnswer += answer;
+           }
+       }
+
+       assertEquals(0,totalCount);
+   }
 }
