@@ -4,14 +4,12 @@ import java.util.List;
 
 public class Day01 {
     public static int productOfDaysAddingTo2020(List<Integer> list){
-        var listIterator = list.listIterator();
-        while(listIterator.hasNext()){
-            var firstNum = listIterator.next();
+        for (Integer firstNum : list) {
             int secondNum = list.stream().
-                filter(x -> x + firstNum == 2020).
-                findFirst().
-                orElse(0);
-            if(secondNum != 0){
+                    filter(x -> x + firstNum == 2020).
+                    findFirst().
+                    orElse(0);
+            if (secondNum != 0) {
                 return firstNum * secondNum;
             }
         }
@@ -19,18 +17,13 @@ public class Day01 {
     }
 
     public static int productOf3DaysAddingTo2020(List<Integer> list){
-        var firstNumIterator = list.listIterator();
-        while(firstNumIterator.hasNext()){
-            var firstNum = firstNumIterator.next();
-
-            var secondNumIterator = list.listIterator();
-            while(secondNumIterator.hasNext()){
-                var secondNum = secondNumIterator.next();
+        for (Integer firstNum : list) {
+            for (Integer secondNum : list) {
                 int thirdNum = list.stream().
-                    filter(x -> x + firstNum + secondNum == 2020).
-                    findFirst().
-                    orElse(0);
-                if(thirdNum != 0){
+                        filter(x -> x + firstNum + secondNum == 2020).
+                        findFirst().
+                        orElse(0);
+                if (thirdNum != 0) {
                     return firstNum * secondNum * thirdNum;
                 }
             }
