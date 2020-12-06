@@ -136,7 +136,7 @@ class PassportTests {
            }
        }
 
-       assertEquals(190,validPassportCount);
+       assertEquals(121,validPassportCount);
    }
 
    static Stream<String> invalidPassportProvider() {
