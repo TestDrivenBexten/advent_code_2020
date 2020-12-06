@@ -1,17 +1,20 @@
 package day_04;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Passport {
     private int birthYear;
     private int issueYear;
     private int expirationYear;
-    private int height;
+    private String height;
     private String hairColor;
     private String eyeColor;
     private String passportId;
     private int countryId;
 
     private Passport(int birthYear, int issueYear,
-            int expirationYear, int height,
+            int expirationYear, String height,
             String hairColor, String eyeColor,
             String passportId, int countryId){
         this.birthYear = birthYear;
@@ -27,20 +30,22 @@ public class Passport {
     public boolean isValid(){
         boolean areYearsValid = this.birthYear > 0 && this.issueYear > 0
             && this.expirationYear > 0;
-        boolean arePhysicalTraitsValid = this.height > 0
+        boolean arePhysicalTraitsValid = !this.height.isEmpty()
             && !this.hairColor.isEmpty() && !this.eyeColor.isEmpty();
         return areYearsValid && arePhysicalTraitsValid && !this.passportId.isEmpty();
     }
 
     public boolean isValidWithFields(){
-        return isEyeColorValid();
+        boolean areYearsValid = isBirthYearValid() && isIssueYearValid() && isExpirationYearValid();
+        boolean arePhysicalTraitsValid = isEyeColorValid() && isHairColorValid() && isHeightValid();
+        return areYearsValid && arePhysicalTraitsValid && isPassportIdValid();
     }
 
     public static Passport readPassportFromBatch(String passportBatch){
         int inputBirthYear = 0;
         int inputIssueYear = 0;
         int inputExpirationYear = 0;
-        int inputHeight = 0;
+        String inputHeight = "";
         String inputHairColor = "";
         String inputEyeColor = "";
         String inputPassportId = "";
@@ -61,8 +66,7 @@ public class Passport {
                     inputExpirationYear = Integer.parseInt(passportValue);
                     break;
                 case "hgt":
-                    String height = passportValue.replaceAll("[a-z]","");
-                    inputHeight = Integer.parseInt(height);
+                    inputHeight = passportValue;
                     break;
                 case "hcl":
                     inputHairColor = passportValue;
@@ -94,6 +98,46 @@ public class Passport {
         return false;
     }
 
+    private boolean isBirthYearValid(){
+        return 1920 <= this.birthYear && this.birthYear <= 2002;
+    }
+    
+    private boolean isIssueYearValid(){
+        return 2010 <= this.issueYear && this.issueYear <= 2020;
+    }
+    
+    private boolean isExpirationYearValid(){
+        return 2020 <= this.expirationYear && this.expirationYear <= 2030;
+    }
+        
+    private boolean isHairColorValid(){
+        Pattern r = Pattern.compile("#([a-f]|\\d){6}");
+        Matcher m = r.matcher(this.hairColor);
+        return m.matches();
+    }
+        
+    private boolean isHeightValid(){
+        Pattern r = Pattern.compile("(\\d+)(cm|in)");
+        Matcher m = r.matcher(this.height);
+        if(!m.matches()){
+            return false;
+        }
+
+        int height = Integer.parseInt(m.group(1));
+        String unit = m.group(1);
+        if(unit.equals("cm")){
+            return 150 <= height && height <= 193;
+        } else {
+            return 59 <= height && height <= 76;
+        }
+    }
+        
+    private boolean isPassportIdValid(){
+        Pattern r = Pattern.compile("\\d{9}");
+        Matcher m = r.matcher(this.passportId);
+        return m.matches();
+    }
+
     /* Getters */
     public int getBirthYear(){
         return birthYear;
@@ -107,7 +151,7 @@ public class Passport {
         return expirationYear;
     }
 
-    public int getHeight(){
+    public String getHeight(){
         return height;
     }
 

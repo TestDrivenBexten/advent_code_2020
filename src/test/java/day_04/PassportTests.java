@@ -8,11 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import util.PuzzleInputReader;
 
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Stream;
 
 class PassportTests {
     @Test
@@ -25,7 +27,7 @@ class PassportTests {
             () -> assertEquals(1937,passport.getBirthYear()),
             () -> assertEquals(2017,passport.getIssueYear()),
             () -> assertEquals(2020,passport.getExpirationYear()),
-            () -> assertEquals(183,passport.getHeight()),
+            () -> assertEquals("183cm",passport.getHeight()),
             () -> assertEquals("#fffffd",passport.getHairColor()),
             () -> assertEquals("gry",passport.getEyeColor()),
             () -> assertEquals("860033327",passport.getPassportId()),
@@ -96,13 +98,47 @@ class PassportTests {
         assertEquals(190,validPassportCount);
     }
 
-   @ParameterizedTest(name = "Eye color ''{0}''")
-   @ValueSource(strings = {"amb","blu","brn","gry","grn","hzl","oth"})
-   @DisplayName("Passport should be valid with eye colors")
-   void Passport_With_All_Test(String eyeColor){
-       String batchInput = String.format("ecl:%s pid:860033327 eyr:2020 hcl:#fffffd\n" +
-               "byr:1937 iyr:2017 cid:147 hgt:183cm",eyeColor);
-       var passport = Passport.readPassportFromBatch(batchInput);
-       assertTrue(passport.isValidWithFields());
+   @ParameterizedTest
+   @MethodSource("invalidPassportProvider")
+   @DisplayName("Passport should be invalid with incorrect fields")
+   void Passport_Should_Be_Invalid_With_Field_Validation(String batchInput){
+        var passport = Passport.readPassportFromBatch(batchInput);
+        assertFalse(passport.isValidWithFields());
+   }
+
+   @ParameterizedTest
+   @MethodSource("validPassportProvider")
+   @DisplayName("Passport should be valid with correct fields")
+   void Passport_Should_Be_Valid_With_Field_Validation(String batchInput){
+        var passport = Passport.readPassportFromBatch(batchInput);
+        assertTrue(passport.isValidWithFields());
+   }
+
+   static Stream<String> invalidPassportProvider() {
+       return Stream.of(
+           "eyr:1972 cid:100\n"
+            + "hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926",
+        "iyr:2019\n" + "hcl:#602927 eyr:1967 hgt:170cm\n" +
+       "ecl:grn pid:012533040 byr:1946",
+       "hcl:dab227 iyr:2012\n" +
+       "ecl:brn hgt:182cm pid:021572410 eyr:2020 byr:1992 cid:277",
+       
+       "hgt:59cm ecl:zzz\n" +
+       "eyr:2038 hcl:74454a iyr:2023\n" +
+       "pid:3556412378 byr:2007");
+   }
+
+   static Stream<String> validPassportProvider(){
+       return Stream.of(
+           "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980\n" +
+       "hcl:#623a2f",
+       "eyr:2029 ecl:blu cid:129 byr:1989\n"+
+       "iyr:2014 pid:896056539 hcl:#a97842 hgt:165cm",
+       "hcl:#888785\n" +
+       "hgt:164cm byr:2001 iyr:2015 cid:88\n" +
+       "pid:545766238 ecl:hzl\n" +
+       "eyr:2022",
+       "iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719"
+       );
    }
 }
