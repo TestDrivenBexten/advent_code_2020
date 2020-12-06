@@ -1,12 +1,16 @@
+package day_01;
+
 import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import day_01.Day01;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-public class Day01Tests {
+class Day01Tests {
     @Test
     @DisplayName("List with 1721 and 299 should return 514579")
     void First_Product_Test(){
