@@ -12,4 +12,8 @@ public class GroupAnswer {
         }
         return uniqueAnswerSet.size();
     }
+
+    public static int calculateUnanimousGroupAnswerCount(String groupAnswer){
+        return -1;
+    }
 }
