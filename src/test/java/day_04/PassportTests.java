@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import util.PuzzleInputReader;
 
 import java.nio.file.Paths;
@@ -93,4 +95,14 @@ class PassportTests {
 
         assertEquals(190,validPassportCount);
     }
+
+   @ParameterizedTest(name = "Eye color ''{0}''")
+   @ValueSource(strings = {"amb","blu","brn","gry","grn","hzl","oth"})
+   @DisplayName("Passport should be valid with eye colors")
+   void Passport_With_All_Test(String eyeColor){
+       String batchInput = String.format("ecl:%s pid:860033327 eyr:2020 hcl:#fffffd\n" +
+               "byr:1937 iyr:2017 cid:147 hgt:183cm",eyeColor);
+       var passport = Passport.readPassportFromBatch(batchInput);
+       assertTrue(passport.isValidWithFields());
+   }
 }

@@ -32,6 +32,10 @@ public class Passport {
         return areYearsValid && arePhysicalTraitsValid && !this.passportId.isEmpty();
     }
 
+    public boolean isValidWithFields(){
+        return false;
+    }
+
     public static Passport readPassportFromBatch(String passportBatch){
         int inputBirthYear = 0;
         int inputIssueYear = 0;
@@ -78,6 +82,10 @@ public class Passport {
             inputExpirationYear, inputHeight,
             inputHairColor, inputEyeColor,
             inputPassportId,inputCountryId);
+    }
+
+    private boolean isEyeColorValid(){
+        return false;
     }
 
     /* Getters */
