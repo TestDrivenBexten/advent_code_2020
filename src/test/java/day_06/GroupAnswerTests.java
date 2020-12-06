@@ -53,6 +53,6 @@ class GroupAnswerTests {
            }
        }
 
-       assertEquals(0,totalCount);
+       assertEquals(6587,totalCount);
    }
 }
