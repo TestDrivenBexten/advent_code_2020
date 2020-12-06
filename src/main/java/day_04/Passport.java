@@ -124,7 +124,7 @@ public class Passport {
         }
 
         int height = Integer.parseInt(m.group(1));
-        String unit = m.group(1);
+        String unit = m.group(2);
         if(unit.equals("cm")){
             return 150 <= height && height <= 193;
         } else {
