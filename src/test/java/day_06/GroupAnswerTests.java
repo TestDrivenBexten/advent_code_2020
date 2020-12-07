@@ -53,23 +53,6 @@ class GroupAnswerTests {
     assertEquals(6587, totalCount);
   }
 
-  @ParameterizedTest
-  @MethodSource("groupUnanimousAnswerCountProvider")
-  @DisplayName("Check group unanimous answer counts")
-  void Group_Unanimous_Answer_Count_Tests(String groupAnswer, int expectedCount) {
-    int actualCount = GroupAnswer.calculateUnanimousGroupAnswerCount(groupAnswer);
-    assertEquals(expectedCount, actualCount);
-  }
-
-  static Stream<Arguments> groupUnanimousAnswerCountProvider() {
-    return Stream.of(
-        arguments("abc", 3),
-        arguments("a\nb\nc", 0),
-        arguments("ab\nac", 1),
-        arguments("a\na\na\na", 1),
-        arguments("b", 1));
-  }
-
   @Test
   @DisplayName("Should count x unanimous answers from groups")
   void Sum_Group_Unanimous_Answer_Test() throws Exception {
