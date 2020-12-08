@@ -39,7 +39,11 @@ class LuggageProcessor {
         val parentBag = bagList.find { bag -> bag.name == parentBagName }
         val childBag = bagList.find { bag -> bag.name == childBagName }
         val capacity = parentBag?.let { searchForBagCapacity(it,childBag) }
-        return capacity?.quantity!! > 0
+        return capacity !== null
+    }
+
+    fun bagColorList(): MutableList<Bag> {
+        return bagList
     }
 
     private fun searchForBagCapacity(parentBag: Bag, childBag: Bag?): BagCapacity?{
