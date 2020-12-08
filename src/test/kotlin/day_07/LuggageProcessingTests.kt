@@ -84,4 +84,16 @@ class LuggageProcessingTests {
 
         assertEquals(126,luggageProcessor.getBagCountRequired("shiny gold"))
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Count Bag Capacity for Shiny Gold Bag`() {
+        val path = Paths.get("src/test/kotlin/day_07/luggage_rule_input.txt")
+        val ruleList = PuzzleInputReader.readStringListFromFile(path)
+
+        val luggageProcessor = LuggageProcessor()
+        ruleList.map { rule -> luggageProcessor.addBagRule(rule) }
+
+        assertEquals(18925,luggageProcessor.getBagCountRequired("shiny gold"))
+    }
 }
