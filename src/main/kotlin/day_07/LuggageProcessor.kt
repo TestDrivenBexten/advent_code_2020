@@ -46,6 +46,19 @@ class LuggageProcessor {
         return bagList
     }
 
+    fun getBagCountRequired(bagName: String): Int {
+        val bag = bagList.find { bag -> bag.name == bagName }
+        val bagCountList = bag?.bagCapacityList?.map {
+            bagCapacity -> if(bagCapacity.bag.bagCapacityList.isEmpty()) {
+                bagCapacity.quantity
+            } else {
+                val childBagCount = getBagCountRequired(bagCapacity.bag.name)
+                bagCapacity.quantity * (childBagCount + 1)
+            }
+        }
+        return bagCountList?.sum() ?: 0
+    }
+
     private fun searchForBagCapacity(parentBag: Bag, childBag: Bag?): BagCapacity?{
         val bagCapacity = parentBag.bagCapacityList.find { bagCapacity -> bagCapacity.bag == childBag }
         if (bagCapacity === null){

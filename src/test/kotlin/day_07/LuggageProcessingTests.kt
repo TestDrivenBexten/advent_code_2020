@@ -69,8 +69,19 @@ class LuggageProcessingTests {
         ruleList.map { rule -> luggageProcessor.addBagRule(rule) }
 
         val colorList = luggageProcessor.bagColorList()
-        println(colorList.size)
         val count = colorList.count { color -> luggageProcessor.canBagFitInBag(color.name, "shiny gold")}
         assertEquals(179,count)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Shiny Gold Bag Should Contain 126 Bags for Small Sample`() {
+        val path = Paths.get("src/test/kotlin/day_07/small_luggage_rule_input.txt")
+        val ruleList = PuzzleInputReader.readStringListFromFile(path)
+
+        val luggageProcessor = LuggageProcessor()
+        ruleList.map { rule -> luggageProcessor.addBagRule(rule) }
+
+        assertEquals(126,luggageProcessor.getBagCountRequired("shiny gold"))
     }
 }
