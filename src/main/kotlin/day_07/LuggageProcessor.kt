@@ -2,7 +2,8 @@ package day_07
 
 import java.util.regex.Pattern
 
-data class Bag(val name: String)
+data class Bag(val name: String, val bagCapacityList: MutableList<BagCapacity>)
+data class BagCapacity(val name: String, val quantity: Int)
 
 class LuggageProcessor {
     private val bagList = mutableListOf<Bag>()
@@ -25,29 +26,33 @@ class LuggageProcessor {
         childStringList.map { childString ->
             val pattern = Pattern.compile(childRegex)
             val matcher = pattern.matcher(childString.trim())
-            println(childString)
             if(!matcher.matches()){
                 return
             }
             val quantity = matcher.group(1).toInt()
             val childName = matcher.group(2)
-            addChildBag(childName,quantity)
+            addChildBag(bagName,childName,quantity)
         }
     }
 
     fun canBagFitInBag(parentBag: String, childBag: String): Boolean{
-        return false;
+        val bag = bagList.find { bag -> bag.name == parentBag }
+        val capacity = bag?.bagCapacityList?.find { bagCapacity -> bagCapacity.name == childBag }
+        return capacity?.quantity!! > 0
     }
 
     private fun addBag(bagName: String){
         if(!hasBagByName(bagName)){
-            val newBag = Bag(bagName)
+            val newBag = Bag(bagName, mutableListOf())
             bagList.add(newBag)
         }
     }
 
-    private fun addChildBag(childBagName: String, childQuantity: Int){
+    private fun addChildBag(parentBagName: String, childBagName: String, childQuantity: Int){
         addBag(childBagName)
+        val bagCapacity = BagCapacity(childBagName,childQuantity)
+        val parentBag = bagList.find { bag -> bag.name == parentBagName }
+        parentBag?.bagCapacityList?.add(bagCapacity)
     }
 
     private fun hasBagByName(bagName: String): Boolean{
