@@ -17,4 +17,15 @@ class LuggageProcessingTests {
             { assertTrue(luggageProcessor.canBagFitInBag("shiny purple","wavy fuchsia")) }
         )
     }
+
+    @Test
+    fun `Shiny Blue Bag Should Hold Drab Tan Bag In Pale Blue Bag`(){
+        val firstRule = "shiny purple bags contain 2 pale blue bags, 1 wavy fuchsia bag, 5 pale salmon bags."
+        val secondRule = "pale blue bags contain 1 drab tan bag, 3 dark chartreuse bags," +
+                                " 2 mirrored gold bags, 3 muted turquoise bags."
+        val luggageProcessor = LuggageProcessor();
+        luggageProcessor.addBagRule(firstRule);
+        luggageProcessor.addBagRule(secondRule);
+        assertTrue(luggageProcessor.canBagFitInBag("shiny purple","drab tan"))
+    }
 }
