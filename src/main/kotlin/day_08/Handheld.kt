@@ -31,6 +31,7 @@ class Handheld {
     fun runProgram(){
         willTerminate = false
         currentInstruction = 0
+        accumulatorValue = 0
         visitedInstructionList.clear()
         var command = commandList[currentInstruction]
 
@@ -47,6 +48,7 @@ class Handheld {
             visitedInstructionList.add(command)
             if(currentInstruction >= commandList.size){
                 willTerminate = true
+                break
             } else {
                 command = commandList[currentInstruction]
             }
@@ -62,7 +64,7 @@ class Handheld {
             when(command){
                 is JumpCommand -> commandList[commandIndex] = buildHandheldCommand("nop", command.commandValue)
                 is NoopCommand -> commandList[commandIndex] = buildHandheldCommand("jmp", command.commandValue)
-                else -> println("Skip command")
+                else -> {}
             }
             isFixed = willProgramTerminate()
             if(!isFixed){

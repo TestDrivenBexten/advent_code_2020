@@ -68,6 +68,6 @@ class HandheldTests {
         handheld.loadProgram(instructionList)
         handheld.fixProgram()
         handheld.runProgram()
-        assertEquals(0,handheld.getAccumulatedValue())
+        assertEquals(501,handheld.getAccumulatedValue())
     }
 }
