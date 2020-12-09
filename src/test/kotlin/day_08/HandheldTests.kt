@@ -1,6 +1,7 @@
 package day_08
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import util.PuzzleInputReader
 import java.nio.file.Paths
@@ -33,5 +34,16 @@ class HandheldTests {
         val accumulatedValue = handheld.getAccumulatedValue()
 
         assertEquals(1217,accumulatedValue)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Small Finite Program Should Terminate`(){
+        val path = Paths.get("src/test/kotlin/day_08/small_finite_instruction_set.txt")
+        val instructionList = PuzzleInputReader.readStringListFromFile(path)
+
+        val handheld = Handheld()
+        handheld.loadProgram(instructionList)
+        assertTrue(handheld.willProgramTerminate())
     }
 }

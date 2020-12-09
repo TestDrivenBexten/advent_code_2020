@@ -8,6 +8,8 @@ class Handheld {
     private var currentInstruction = 0;
     private val visitedInstructionList = mutableListOf<HandheldCommand>()
 
+    private var willTerminate = false
+
     private val commandRegex = "(\\w+) ([-+]\\d+)"
 
     fun loadProgram(instructionList: List<String>){
@@ -42,8 +44,17 @@ class Handheld {
                 else -> println("Command not recognized")
             }
             visitedInstructionList.add(command)
-            command = commandList[currentInstruction]
+            if(currentInstruction >= commandList.size){
+                willTerminate = true
+            } else {
+                command = commandList[currentInstruction]
+            }
         }
+    }
+
+    fun willProgramTerminate():Boolean{
+        runProgram()
+        return willTerminate
     }
 
     fun getAccumulatedValue(): Int{
