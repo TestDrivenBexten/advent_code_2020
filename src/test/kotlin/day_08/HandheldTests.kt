@@ -57,4 +57,17 @@ class HandheldTests {
         handheld.loadProgram(instructionList)
         assertTrue(handheld.willProgramTerminate())
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Fix Puzzle Program and Find Accumulator Value`(){
+        val path = Paths.get("src/test/kotlin/day_08/puzzle_instruction_set.txt")
+        val instructionList = PuzzleInputReader.readStringListFromFile(path)
+
+        val handheld = Handheld()
+        handheld.loadProgram(instructionList)
+        handheld.fixProgram()
+        handheld.runProgram()
+        assertEquals(0,handheld.getAccumulatedValue())
+    }
 }

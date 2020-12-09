@@ -29,6 +29,7 @@ class Handheld {
     }
 
     fun runProgram(){
+        willTerminate = false
         currentInstruction = 0
         visitedInstructionList.clear()
         var command = commandList[currentInstruction]
@@ -49,6 +50,25 @@ class Handheld {
             } else {
                 command = commandList[currentInstruction]
             }
+        }
+    }
+
+    fun fixProgram(){
+        var commandIndex = 0
+        var isFixed = willProgramTerminate()
+
+        while(!isFixed){
+            val command = commandList[commandIndex]
+            when(command){
+                is JumpCommand -> commandList[commandIndex] = buildHandheldCommand("nop", command.commandValue)
+                is NoopCommand -> commandList[commandIndex] = buildHandheldCommand("jmp", command.commandValue)
+                else -> println("Skip command")
+            }
+            isFixed = willProgramTerminate()
+            if(!isFixed){
+                commandList[commandIndex] = command
+            }
+            commandIndex++
         }
     }
 
