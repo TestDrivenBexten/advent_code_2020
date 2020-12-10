@@ -36,4 +36,14 @@ class PreambleEncodingTests {
         val encryptionWeakness = findEncryptionWeakness(5,numberList)
         assertEquals(62,encryptionWeakness)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Solve Puzzle Preamble Part 2`(){
+        val path = Paths.get("src/test/kotlin/day_09/puzzle_preamble.txt")
+        val numberList = PuzzleInputReader.readLongListFromFile(path)
+
+        val encryptionWeakness = findEncryptionWeakness(25,numberList)
+        assertEquals(51152360,encryptionWeakness)
+    }
 }
