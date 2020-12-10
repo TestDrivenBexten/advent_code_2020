@@ -25,3 +25,17 @@ fun findNonMatchingNumberFromList(preambleLength: Int, numberList: List<Long>): 
     }
     return 0
 }
+
+fun findEncryptionWeakness(preambleLength: Int, numberList: List<Long>): Long {
+    val nonMatchingNumber = findNonMatchingNumberFromList(preambleLength, numberList)
+    val listLength = numberList.size
+    for(j in 0..listLength){
+        for(k in j..listLength){
+            val rangeList = numberList.subList(j,k)
+            if(nonMatchingNumber == rangeList.sum()){
+                return rangeList.min()?.plus(rangeList.max()!!)!!
+            }
+        }
+    }
+    return 0
+}

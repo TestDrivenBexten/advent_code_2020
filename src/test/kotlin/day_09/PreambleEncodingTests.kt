@@ -26,4 +26,14 @@ class PreambleEncodingTests {
         val nonMatchingNumber = findNonMatchingNumberFromList(25,numberList)
         assertEquals(373803594,nonMatchingNumber)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Small Preamble Should Have 62 for Encryption Weakness`(){
+        val path = Paths.get("src/test/kotlin/day_09/small_preamble.txt")
+        val numberList = PuzzleInputReader.readLongListFromFile(path)
+
+        val encryptionWeakness = findEncryptionWeakness(5,numberList)
+        assertEquals(62,encryptionWeakness)
+    }
 }
