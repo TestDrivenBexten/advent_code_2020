@@ -18,4 +18,13 @@ public class PuzzleInputReader {
   public static List<String> readStringListFromFile(Path path) throws Exception {
     return Files.readAllLines(path);
   }
+
+  public static List<Long> readLongListFromFile(Path path) throws Exception {
+    var longList = new ArrayList<Long>();
+    List<String> lines = Files.readAllLines(path);
+    for (String line : lines) {
+      longList.add(Long.parseLong(line));
+    }
+    return longList;
+  }
 }

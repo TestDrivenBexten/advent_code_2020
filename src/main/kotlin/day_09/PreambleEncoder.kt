@@ -1,12 +1,11 @@
 package day_09
 
-fun findNonMatchingNumberFromList(preambleLength: Int, numberList: List<Int>): Int{
-    var preambleList: List<Int>
+fun findNonMatchingNumberFromList(preambleLength: Int, numberList: List<Long>): Long{
+    var preambleList: List<Long>
 
     var startOffset = 0
     while(startOffset + preambleLength + 1 < numberList.size){
         preambleList = numberList.subList(startOffset,preambleLength + startOffset)
-        println(preambleList)
 
         var hasSumMatch = false
         val nextNumber = numberList[startOffset + preambleLength + 1]
