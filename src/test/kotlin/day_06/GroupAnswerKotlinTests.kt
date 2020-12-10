@@ -27,7 +27,6 @@ class GroupAnswerKotlinTests {
             "'b', 1"
     )
     fun `Group Unanimous Answer Count Tests`(groupAnswer: String, expectedCount: Int) {
-        println(groupAnswer)
         val actualCount = GroupAnswer.calculateUnanimousGroupAnswerCount(groupAnswer)
         assertEquals(expectedCount, actualCount)
     }
