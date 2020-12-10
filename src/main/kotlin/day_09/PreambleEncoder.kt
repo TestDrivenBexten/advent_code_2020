@@ -8,7 +8,7 @@ fun findNonMatchingNumberFromList(preambleLength: Int, numberList: List<Long>): 
         preambleList = numberList.subList(startOffset,preambleLength + startOffset)
 
         var hasSumMatch = false
-        val nextNumber = numberList[startOffset + preambleLength + 1]
+        val nextNumber = numberList[startOffset + preambleLength]
         for(j in 0 until preambleLength - 1){
             for(k in j + 1 until preambleLength){
                 val firstNum = preambleList[j]

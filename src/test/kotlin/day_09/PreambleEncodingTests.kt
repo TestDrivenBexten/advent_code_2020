@@ -24,6 +24,6 @@ class PreambleEncodingTests {
         val numberList = PuzzleInputReader.readLongListFromFile(path)
 
         val nonMatchingNumber = findNonMatchingNumberFromList(25,numberList)
-        assertEquals(127,nonMatchingNumber)
+        assertEquals(373803594,nonMatchingNumber)
     }
 }
