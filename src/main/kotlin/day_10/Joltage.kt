@@ -21,8 +21,30 @@ fun getJoltageDifference(joltageList: List<Int>): JoltageDifference{
 
 fun getArrangementCount(joltageList: List<Int>): Int {
     val sortedList = buildJoltageList(joltageList)
-    val arrangementList = buildArrangementList(sortedList)
-    return arrangementList.size
+    return getJoltageArrangementCount(sortedList)
+}
+
+private fun getJoltageArrangementCount(joltageList: List<Int>): Int {
+    var arrangementCount = 1;
+
+    // Find gap of 3
+    for(j in 0 until joltageList.size - 2){
+        val currentJoltage = joltageList[j]
+        val nextJoltage = joltageList[j + 1]
+        if(nextJoltage - currentJoltage == 3){
+            arrangementCount *= when(j){
+                2 -> 2
+                3 -> 4
+                4 -> 7
+                else -> 1
+            }
+            val sublist = joltageList.subList(j+1,joltageList.size)
+            println(sublist)
+            arrangementCount *= getJoltageArrangementCount(sublist)
+            break
+        }
+    }
+    return arrangementCount
 }
 
 private fun buildArrangementList(joltageList: List<Int>): List<List<Int>>{
