@@ -66,4 +66,14 @@ class JoltageTests {
         val arrangementCount = getArrangementCount(joltageList)
         assertEquals(19208,arrangementCount)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Solve for problem 10 part 2`(){
+        val path = Paths.get("src/test/kotlin/day_10/puzzle_joltage_input.txt")
+        val joltageList = PuzzleInputReader.readIntListFromFile(path)
+
+        val arrangementCount = getArrangementCount(joltageList)
+        assertEquals(19208,arrangementCount)
+    }
 }
