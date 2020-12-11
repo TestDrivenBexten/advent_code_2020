@@ -30,12 +30,19 @@ private fun buildArrangementList(joltageList: List<Int>): List<List<Int>>{
     val currentJoltage = joltageList[0]
 
     val indexOneGreater = joltageList.indexOf(currentJoltage + 1)
+    val indexTwoGreater = joltageList.indexOf(currentJoltage + 2)
     val indexThreeGreater = joltageList.indexOf(currentJoltage + 3)
 
     var oneArrangementList: List<List<Int>> = listOf()
     if (indexOneGreater != -1){
         val oneSublist = joltageList.subList(indexOneGreater,joltageList.size)
         oneArrangementList = buildArrangementList(oneSublist)
+    }
+
+    var twoArrangementList: List<List<Int>> = listOf()
+    if (indexTwoGreater != -1){
+        val twoSublist = joltageList.subList(indexTwoGreater,joltageList.size)
+        twoArrangementList = buildArrangementList(twoSublist)
     }
 
     var threeArrangementList: List<List<Int>> = listOf()
@@ -55,6 +62,17 @@ private fun buildArrangementList(joltageList: List<Int>): List<List<Int>>{
     }
     oneArrangementList = oneArrangementList.filter { it.contains(joltageList.last()) }
 
+    twoArrangementList = twoArrangementList.map {
+        arrangementList ->
+        val mutArrangementList = arrangementList.toMutableList()
+        mutArrangementList.add(0,currentJoltage)
+        mutArrangementList
+    }
+    if (twoArrangementList.isEmpty()){
+        twoArrangementList = listOf(listOf(currentJoltage))
+    }
+    twoArrangementList = twoArrangementList.filter { it.contains(joltageList.last()) }
+
     threeArrangementList = threeArrangementList.map {
         arrangementList ->
         val mutArrangementList = arrangementList.toMutableList()
@@ -66,17 +84,7 @@ private fun buildArrangementList(joltageList: List<Int>): List<List<Int>>{
     }
     threeArrangementList = threeArrangementList.filter { it.contains(joltageList.last()) }
 
-    print("Current list: ")
-    println(joltageList)
-    print("One sublist: ")
-    println(oneArrangementList)
-    print("Three sublist: ")
-    println(threeArrangementList)
-    print("Combined: ")
-    val combinedList = oneArrangementList + threeArrangementList
-    println(combinedList)
-    println(combinedList.distinct())
-
+    val combinedList = oneArrangementList + twoArrangementList + threeArrangementList
     return combinedList.distinct()
 }
 
