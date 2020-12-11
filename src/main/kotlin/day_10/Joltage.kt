@@ -53,6 +53,7 @@ private fun buildArrangementList(joltageList: List<Int>): List<List<Int>>{
     if (oneArrangementList.isEmpty()){
         oneArrangementList = listOf(listOf(currentJoltage))
     }
+    oneArrangementList = oneArrangementList.filter { it.contains(joltageList.last()) }
 
     threeArrangementList = threeArrangementList.map {
         arrangementList ->
@@ -63,15 +64,20 @@ private fun buildArrangementList(joltageList: List<Int>): List<List<Int>>{
     if (threeArrangementList.isEmpty()){
         threeArrangementList = listOf(listOf(currentJoltage))
     }
+    threeArrangementList = threeArrangementList.filter { it.contains(joltageList.last()) }
 
+    print("Current list: ")
+    println(joltageList)
     print("One sublist: ")
     println(oneArrangementList)
     print("Three sublist: ")
     println(threeArrangementList)
     print("Combined: ")
-    println(oneArrangementList + threeArrangementList)
+    val combinedList = oneArrangementList + threeArrangementList
+    println(combinedList)
+    println(combinedList.distinct())
 
-    return oneArrangementList + threeArrangementList
+    return combinedList.distinct()
 }
 
 private fun buildJoltageList(joltageList: List<Int>): List<Int>{
