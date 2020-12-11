@@ -20,3 +20,7 @@ fun getJoltageDifference(joltageList: List<Int>): JoltageDifference{
     }
     return JoltageDifference(oneJoltCount,threeJoltCount)
 }
+
+fun getArrangementCount(joltageList: List<Int>): Int {
+    return 0
+}

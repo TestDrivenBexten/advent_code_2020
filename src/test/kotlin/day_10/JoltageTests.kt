@@ -46,4 +46,14 @@ class JoltageTests {
         val joltCountProduct = oneJoltCount * threeJoltCount
         assertEquals(2046,joltCountProduct)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Small Joltage Input Should Have 8 Arrangements`(){
+        val path = Paths.get("src/test/kotlin/day_10/small_joltage_input.txt")
+        val joltageList = PuzzleInputReader.readIntListFromFile(path)
+
+        val arrangementCount = getArrangementCount(joltageList)
+        assertEquals(8,arrangementCount)
+    }
 }
