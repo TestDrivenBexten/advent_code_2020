@@ -34,4 +34,16 @@ class JoltageTests {
                 { assertEquals(10,threeJoltCount)}
         )
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Solve Joltage Problem Part 1`(){
+        val path = Paths.get("src/test/kotlin/day_10/puzzle_joltage_input.txt")
+        val joltageList = PuzzleInputReader.readIntListFromFile(path)
+
+        val (oneJoltCount, threeJoltCount) = getJoltageDifference(joltageList)
+
+        val joltCountProduct = oneJoltCount * threeJoltCount
+        assertEquals(2046,joltCountProduct)
+    }
 }
