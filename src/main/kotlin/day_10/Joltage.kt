@@ -22,7 +22,6 @@ fun getJoltageDifference(joltageList: List<Int>): JoltageDifference{
 fun getArrangementCount(joltageList: List<Int>): Int {
     val sortedList = buildJoltageList(joltageList)
     val arrangementList = buildArrangementList(sortedList)
-    println(arrangementList)
     return arrangementList.size
 }
 

@@ -56,4 +56,14 @@ class JoltageTests {
         val arrangementCount = getArrangementCount(joltageList)
         assertEquals(8,arrangementCount)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Medium Joltage Input Should Have Many Arrangements`(){
+        val path = Paths.get("src/test/kotlin/day_10/medium_joltage_input.txt")
+        val joltageList = PuzzleInputReader.readIntListFromFile(path)
+
+        val arrangementCount = getArrangementCount(joltageList)
+        assertEquals(19208,arrangementCount)
+    }
 }
