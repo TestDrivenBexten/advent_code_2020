@@ -74,6 +74,6 @@ class JoltageTests {
         val joltageList = PuzzleInputReader.readIntListFromFile(path)
 
         val arrangementCount = getArrangementCount(joltageList)
-        assertEquals(19208,arrangementCount)
+        assertEquals(1157018619904,arrangementCount)
     }
 }
