@@ -26,6 +26,20 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
         }
     }
 
+    // Will run until seats stop changing
+    fun autoAdvance(){
+        val maxRun = 100; // Avoid infinite loop
+        var currentSeatingLayout = listOf<List<Seat>>()
+
+        var currentRun = 0
+        while(currentRun < maxRun && this.seatingLayoutList != currentSeatingLayout){
+            currentSeatingLayout = this.seatingLayoutList
+            advanceRound()
+            currentRun++
+            println(currentRun)
+        }
+    }
+
     fun advanceRound(){
         val rowCount = seatingLayoutList.size
         val colCount = seatingLayoutList[0].size

@@ -71,8 +71,12 @@ class SeatingSystemTests {
     @Test
     @Throws(Exception::class)
     fun `Solve for Sample Layout`(){
-        val path = Paths.get("src/test/kotlin/day_11/sample_1_initial.txt")
-        val joltageList = PuzzleInputReader.readStringListFromFile(path)
-        assertEquals(0,1); // Failing until implemented
+        val initialPath = Paths.get("src/test/kotlin/day_11/sample_1_initial.txt")
+        val initialSeatList = PuzzleInputReader.readStringListFromFile(initialPath)
+
+        val seatingLayout = SeatingLayout.loadSeatingFromString(initialSeatList)
+        seatingLayout.autoAdvance()
+
+        assertEquals(37,seatingLayout.getSeatCount(Seat.OCCUPIED))
     }
 }
