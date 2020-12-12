@@ -13,6 +13,7 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
                 val seatingRow = seatingString.map { seat ->
                     when(seat){
                         'L' -> Seat.EMPTY
+                        '#' -> Seat.OCCUPIED
                         else -> Seat.FLOOR
                     }
                 }
