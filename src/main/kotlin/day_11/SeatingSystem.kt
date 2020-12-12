@@ -5,7 +5,7 @@ enum class Seat {
 }
 
 class SeatingLayout private constructor(seatList: List<List<Seat>>){
-    val seatingLayoutList = seatList
+    private var seatingLayoutList = seatList
     companion object Factory {
         fun loadSeatingFromString(seatingList: List<String>): SeatingLayout {
             val seatingLayout = mutableListOf<List<Seat>>()
@@ -24,7 +24,23 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
     }
 
     fun advanceRound(){
+        val rowCount = seatingLayoutList.size
+        val colCount = seatingLayoutList[0].size
 
+        val nextSeatingLayout = mutableListOf<List<Seat>>()
+        for(row in 0 until rowCount){
+            val seatingRow = mutableListOf<Seat>()
+            for(col in 0 until colCount){
+                val currentSeat = seatingLayoutList[row][col]
+                if(currentSeat == Seat.EMPTY){
+                    seatingRow.add(Seat.OCCUPIED)
+                }else{
+                    seatingRow.add(currentSeat)
+                }
+            }
+            nextSeatingLayout.add(seatingRow)
+        }
+        seatingLayoutList = nextSeatingLayout
     }
 
     fun displayLayout(){
