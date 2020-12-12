@@ -1,5 +1,8 @@
 package day_11
 
+import java.lang.Integer.max
+import java.lang.Integer.min
+
 enum class Seat {
     FLOOR, EMPTY, OCCUPIED
 }
@@ -30,11 +33,24 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
         val nextSeatingLayout = mutableListOf<List<Seat>>()
         for(row in 0 until rowCount){
             val seatingRow = mutableListOf<Seat>()
-            for(col in 0 until colCount){
+            for(col in 0 until colCount) {
                 val currentSeat = seatingLayoutList[row][col]
-                if(currentSeat == Seat.EMPTY){
-                    seatingRow.add(Seat.OCCUPIED)
-                }else{
+
+                if (currentSeat == Seat.EMPTY) {
+                    val occupiedSeatCount = countAdjacentOccupiedSeats(row, col)
+                    if (occupiedSeatCount == 0) {
+                        seatingRow.add(Seat.OCCUPIED)
+                    } else {
+                        seatingRow.add(Seat.EMPTY)
+                    }
+                } else if (currentSeat == Seat.OCCUPIED) {
+                    val occupiedSeatCount = countAdjacentOccupiedSeats(row, col)
+                    if(occupiedSeatCount >= 4){
+                        seatingRow.add(Seat.EMPTY)
+                    } else {
+                        seatingRow.add(Seat.OCCUPIED)
+                    }
+                } else {
                     seatingRow.add(currentSeat)
                 }
             }
@@ -63,5 +79,32 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
                 }
             }
         }
+    }
+
+    private fun countAdjacentOccupiedSeats(row: Int, col: Int): Int{
+        val rowCount = seatingLayoutList.size
+        val colCount = seatingLayoutList[0].size
+
+        var occupiedCount = 0
+
+        // Column Limits
+        val previousCol = max(0, col - 1)
+        val nextCol = min(colCount - 1, col + 1)
+
+        // Count previous row
+        if(row > 0){
+            val previousRow = row - 1
+            for(j in previousCol..nextCol){
+                val currentSeat = seatingLayoutList[previousRow][j]
+                if(currentSeat == Seat.OCCUPIED){
+                    occupiedCount++
+                }
+            }
+        }
+
+        // Count current row
+
+
+        return occupiedCount
     }
 }
