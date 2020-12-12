@@ -23,6 +23,20 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
         }
     }
 
+    fun advanceRound(){
+
+    }
+
+    fun displayLayout(){
+        seatingLayoutList.map {
+            seatingRow -> println(seatingRow)
+        }
+    }
+
+    fun hasSameLayout(layout: SeatingLayout): Boolean {
+        return this.seatingLayoutList == layout.seatingLayoutList
+    }
+
     fun getSeatCount(seatEnum: Seat): Int{
         return this.seatingLayoutList.fold(0) { sum, seatingRow ->
             sum + seatingRow.fold(0) {seatCount, seat ->

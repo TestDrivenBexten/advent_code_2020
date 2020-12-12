@@ -1,6 +1,7 @@
 package day_11
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import util.PuzzleInputReader
@@ -31,6 +32,23 @@ class SeatingSystemTests {
                 {assertEquals(71,seatingLayout.getSeatCount(Seat.OCCUPIED))},
                 {assertEquals(29,seatingLayout.getSeatCount(Seat.FLOOR))}
         )
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Load Initial Sample And Verify Two Rounds`(){
+        val initialPath = Paths.get("src/test/kotlin/day_11/sample_1_initial.txt")
+        val initialSeatList = PuzzleInputReader.readStringListFromFile(initialPath)
+
+        val initialSeatingLayout = SeatingLayout.loadSeatingFromString(initialSeatList)
+        initialSeatingLayout.advanceRound()
+        initialSeatingLayout.advanceRound()
+
+        val secondRoundPath = Paths.get("src/test/kotlin/day_11/sample_1_round_2.txt")
+        val secondRoundSeatList = PuzzleInputReader.readStringListFromFile(secondRoundPath)
+        val secondRoundSeatingLayout = SeatingLayout.loadSeatingFromString(secondRoundSeatList)
+
+        assertTrue(initialSeatingLayout.hasSameLayout(secondRoundSeatingLayout))
     }
 
     @Test
