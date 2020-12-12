@@ -13,29 +13,10 @@ class SeatingSystemTests {
         val path = Paths.get("src/test/kotlin/day_11/sample_1_initial.txt")
         val seatList = PuzzleInputReader.readStringListFromFile(path)
 
-        val seatLayoutList = loadSeatingFromString(seatList)
-        val emptySeatCount = seatLayoutList.fold(0) { sum, seatingRow ->
-            sum + seatingRow.fold(0) {emptyCount, seat ->
-                if (seat == Seat.EMPTY){
-                    emptyCount + 1
-                } else {
-                    emptyCount
-                }
-            }
-        }
-        val floorCount = seatLayoutList.fold(0) { sum, seatingRow ->
-            sum + seatingRow.fold(0) {emptyCount, seat ->
-                if (seat == Seat.FLOOR){
-                    emptyCount + 1
-                } else {
-                    emptyCount
-                }
-            }
-        }
-        
+        val seatingLayout = SeatingLayout.loadSeatingFromString(seatList)
         assertAll("Check initial seat counts",
-                {assertEquals(71,emptySeatCount)},
-                {assertEquals(29,floorCount)}
+                {assertEquals(71,seatingLayout.getSeatCount(Seat.EMPTY))},
+                {assertEquals(29,seatingLayout.getSeatCount(Seat.FLOOR))}
         )
     }
 

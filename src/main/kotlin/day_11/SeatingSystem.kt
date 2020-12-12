@@ -4,16 +4,33 @@ enum class Seat {
     FLOOR, EMPTY, OCCUPIED
 }
 
-fun loadSeatingFromString(seatingList: List<String>): List<List<Seat>> {
-    val seatingLayout = mutableListOf<List<Seat>>()
-    seatingList.map { seatingString ->
-        val seatingRow = seatingString.map { seat ->
-            when(seat){
-                'L' -> Seat.EMPTY
-                else -> Seat.FLOOR
+class SeatingLayout private constructor(seatList: List<List<Seat>>){
+    val seatingLayoutList = seatList
+    companion object Factory {
+        fun loadSeatingFromString(seatingList: List<String>): SeatingLayout {
+            val seatingLayout = mutableListOf<List<Seat>>()
+            seatingList.map { seatingString ->
+                val seatingRow = seatingString.map { seat ->
+                    when(seat){
+                        'L' -> Seat.EMPTY
+                        else -> Seat.FLOOR
+                    }
+                }
+                seatingLayout.add(seatingRow)
+            }
+            return SeatingLayout(seatingLayout)
+        }
+    }
+
+    fun getSeatCount(seatEnum: Seat): Int{
+        return this.seatingLayoutList.fold(0) { sum, seatingRow ->
+            sum + seatingRow.fold(0) {seatCount, seat ->
+                if (seat == seatEnum){
+                    seatCount + 1
+                } else {
+                    seatCount
+                }
             }
         }
-        seatingLayout.add(seatingRow)
     }
-    return seatingLayout
 }
