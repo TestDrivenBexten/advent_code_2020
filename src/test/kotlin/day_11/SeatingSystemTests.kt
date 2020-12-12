@@ -42,7 +42,6 @@ class SeatingSystemTests {
 
         val initialSeatingLayout = SeatingLayout.loadSeatingFromString(initialSeatList)
         initialSeatingLayout.advanceRound()
-        initialSeatingLayout.advanceRound()
 
         val firstRoundPath = Paths.get("src/test/kotlin/day_11/sample_1_round_1.txt")
         val firstRoundSeatList = PuzzleInputReader.readStringListFromFile(firstRoundPath)
