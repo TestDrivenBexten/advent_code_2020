@@ -102,6 +102,17 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
             }
         }
 
+        // Count current row
+        for(j in previousCol..nextCol){
+            if(j == col){
+                continue
+            }
+            val currentSeat = seatingLayoutList[row][j]
+            if(currentSeat == Seat.OCCUPIED){
+                occupiedCount++
+            }
+        }
+
         // Count next row
         if(row < rowCount - 1){
             val nextRow = row + 1
