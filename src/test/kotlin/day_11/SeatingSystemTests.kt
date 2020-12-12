@@ -36,6 +36,23 @@ class SeatingSystemTests {
 
     @Test
     @Throws(Exception::class)
+    fun `Load Initial Sample And Verify One Round`(){
+        val initialPath = Paths.get("src/test/kotlin/day_11/sample_1_initial.txt")
+        val initialSeatList = PuzzleInputReader.readStringListFromFile(initialPath)
+
+        val initialSeatingLayout = SeatingLayout.loadSeatingFromString(initialSeatList)
+        initialSeatingLayout.advanceRound()
+        initialSeatingLayout.advanceRound()
+
+        val firstRoundPath = Paths.get("src/test/kotlin/day_11/sample_1_round_1.txt")
+        val firstRoundSeatList = PuzzleInputReader.readStringListFromFile(firstRoundPath)
+        val firstRoundSeatingLayout = SeatingLayout.loadSeatingFromString(firstRoundSeatList)
+
+        assertTrue(initialSeatingLayout.hasSameLayout(firstRoundSeatingLayout))
+    }
+
+    @Test
+    @Throws(Exception::class)
     fun `Load Initial Sample And Verify Two Rounds`(){
         val initialPath = Paths.get("src/test/kotlin/day_11/sample_1_initial.txt")
         val initialSeatList = PuzzleInputReader.readStringListFromFile(initialPath)
