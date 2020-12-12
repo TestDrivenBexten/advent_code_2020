@@ -33,11 +33,10 @@ class SeatingSystemTests {
             }
         }
         
-        assertAll("",
+        assertAll("Check initial seat counts",
                 {assertEquals(71,emptySeatCount)},
                 {assertEquals(29,floorCount)}
         )
-        assertEquals(0,1); // Failing until implemented
     }
 
     @Test
