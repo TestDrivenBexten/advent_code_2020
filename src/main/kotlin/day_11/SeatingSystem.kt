@@ -7,8 +7,8 @@ enum class Seat {
     FLOOR, EMPTY, OCCUPIED
 }
 
-class SeatingLayout private constructor(seatList: List<List<Seat>>){
-    private var seatingLayoutList = seatList
+abstract class SeatingLayout(seatList: List<List<Seat>>){
+    var seatingLayoutList = seatList
     companion object Factory {
         fun loadSeatingFromString(seatingList: List<String>): SeatingLayout {
             val seatingLayout = mutableListOf<List<Seat>>()
@@ -22,7 +22,7 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
                 }
                 seatingLayout.add(seatingRow)
             }
-            return SeatingLayout(seatingLayout)
+            return SimpleSeatingLayout(seatingLayout)
         }
     }
 
@@ -95,7 +95,11 @@ class SeatingLayout private constructor(seatList: List<List<Seat>>){
         }
     }
 
-    private fun countAdjacentOccupiedSeats(row: Int, col: Int): Int{
+    abstract fun countAdjacentOccupiedSeats(row: Int, col: Int): Int
+}
+
+private class SimpleSeatingLayout(seatList: List<List<Seat>>): SeatingLayout(seatList) {
+    override fun countAdjacentOccupiedSeats(row: Int, col: Int): Int{
         val rowCount = seatingLayoutList.size
         val colCount = seatingLayoutList[0].size
 
