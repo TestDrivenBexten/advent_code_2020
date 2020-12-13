@@ -168,8 +168,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col -1
         while(currentRow >= 0 &&  currentCol >= 0){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -183,8 +184,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col
         while(currentRow >= 0 &&  currentCol >= 0){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -197,8 +199,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col + 1
         while(currentRow >= 0 &&  currentCol < colCount){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -212,8 +215,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col - 1
         while(currentRow >= 0 &&  currentCol >= 0){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -226,8 +230,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col + 1
         while(currentRow >= 0 && currentCol < colCount){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -240,8 +245,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col - 1
         while(currentRow < rowCount && currentCol >= 0){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -255,8 +261,9 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col
         while(currentRow < rowCount && currentCol >= 0){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
@@ -269,12 +276,14 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
         currentCol = col + 1
         while(currentRow < rowCount && currentCol < colCount){
             val currentCell = seatingLayoutList[currentRow][currentCol]
-            isOccupied = currentCell == Seat.OCCUPIED
-            if(isOccupied){
+            if(currentCell == Seat.EMPTY){
+                break
+            } else if(currentCell == Seat.OCCUPIED){
                 occupiedCount++
                 break
             } else {
                 currentRow++
+                currentCol++
             }
         }
 
