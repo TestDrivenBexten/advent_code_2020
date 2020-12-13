@@ -8,7 +8,7 @@ import java.nio.file.Paths
 class FerryTests {
     @Test
     @Throws(Exception::class)
-    fun `Load Initial Sample Layout`(){
+    fun `Small Ferry Command List Should Have Manhattan Distance 25`(){
         val path = Paths.get("src/test/kotlin/day_12/sample_command.txt")
         val commandList = PuzzleInputReader.readStringListFromFile(path)
 
