@@ -16,4 +16,15 @@ class FerryTests {
         ferry.executeCommands()
         assertEquals(25,ferry.getManhattanDistance())
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Find Manhattan Distance for Puzzle Input`(){
+        val path = Paths.get("src/test/kotlin/day_12/puzzle_command.txt")
+        val commandList = PuzzleInputReader.readStringListFromFile(path)
+
+        val ferry = Ferry(commandList)
+        ferry.executeCommands()
+        assertEquals(25,ferry.getManhattanDistance())
+    }
 }
