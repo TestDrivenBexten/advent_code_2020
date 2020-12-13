@@ -10,7 +10,7 @@ enum class Seat {
 abstract class SeatingLayout(seatList: List<List<Seat>>){
     var seatingLayoutList = seatList
     companion object Factory {
-        fun loadSeatingFromString(seatingList: List<String>): SeatingLayout {
+        fun loadSeatingFromString(seatingList: List<String>, isComplicated: Boolean = false): SeatingLayout {
             val seatingLayout = mutableListOf<List<Seat>>()
             seatingList.map { seatingString ->
                 val seatingRow = seatingString.map { seat ->
@@ -22,7 +22,11 @@ abstract class SeatingLayout(seatList: List<List<Seat>>){
                 }
                 seatingLayout.add(seatingRow)
             }
-            return SimpleSeatingLayout(seatingLayout)
+            if(isComplicated){
+                return ComplicatedSeatingLayout(seatingLayout)
+            } else {
+                return SimpleSeatingLayout(seatingLayout)
+            }
         }
     }
 
@@ -143,5 +147,11 @@ private class SimpleSeatingLayout(seatList: List<List<Seat>>): SeatingLayout(sea
         }
 
         return occupiedCount
+    }
+}
+
+private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayout(seatList) {
+    override fun countAdjacentOccupiedSeats(row: Int, col: Int): Int {
+        TODO("Not yet implemented")
     }
 }
