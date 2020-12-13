@@ -207,6 +207,34 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
             }
         }
 
+        // Check lefthand seats
+        currentRow = row
+        currentCol = col - 1
+        while(currentRow >= 0 &&  currentCol >= 0){
+            val currentCell = seatingLayoutList[currentRow][currentCol]
+            isOccupied = currentCell == Seat.OCCUPIED
+            if(isOccupied){
+                occupiedCount++
+                break
+            } else {
+                currentCol--
+            }
+        }
+
+        // Check righthand seats
+        currentRow = row
+        currentCol = col + 1
+        while(currentRow >= 0 && currentCol < colCount){
+            val currentCell = seatingLayoutList[currentRow][currentCol]
+            isOccupied = currentCell == Seat.OCCUPIED
+            if(isOccupied){
+                occupiedCount++
+                break
+            } else {
+                currentCol++
+            }
+        }
+
         return occupiedCount
     }
 }
