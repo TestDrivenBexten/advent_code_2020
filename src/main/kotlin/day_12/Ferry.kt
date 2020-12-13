@@ -67,7 +67,7 @@ class Ferry(commandList: List<String>) {
     }
 
     fun getManhattanDistance(): Int{
-        return xCoordinate + yCoordinate
+        return abs(xCoordinate) + abs(yCoordinate)
     }
 
     private fun moveShipForward(magnitude: Int){
@@ -81,10 +81,11 @@ class Ferry(commandList: List<String>) {
 
     private fun rotateShipLeft(degree: Int){
         shipDirection -= degree
-        shipDirection = abs(shipDirection)
+        shipDirection = abs(shipDirection % 360)
     }
 
     private fun rotateShipRight(degree: Int){
         shipDirection += degree
+        shipDirection = abs(shipDirection % 360)
     }
 }
