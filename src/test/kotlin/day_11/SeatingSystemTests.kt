@@ -103,4 +103,16 @@ class SeatingSystemTests {
 
         assertEquals(26,seatingLayout.getSeatCount(Seat.OCCUPIED))
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Count Final Occupied Seats for Complicated Puzzle Input`(){
+        val initialPath = Paths.get("src/test/kotlin/day_11/puzzle_seating_input.txt")
+        val initialSeatList = PuzzleInputReader.readStringListFromFile(initialPath)
+
+        val seatingLayout = SeatingLayout.loadSeatingFromString(initialSeatList, true)
+        seatingLayout.autoAdvance()
+
+        assertEquals(1897,seatingLayout.getSeatCount(Seat.OCCUPIED))
+    }
 }
