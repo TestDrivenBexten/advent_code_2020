@@ -13,6 +13,7 @@ class FerryTests {
         val commandList = PuzzleInputReader.readStringListFromFile(path)
 
         val ferry = Ferry(commandList)
+        ferry.executeCommands()
         assertEquals(25,ferry.getManhattanDistance())
     }
 }
