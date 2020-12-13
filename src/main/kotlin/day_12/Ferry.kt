@@ -118,16 +118,6 @@ class Ferry(commandList: List<String>) {
         shipDirection = correctedDegree(shipDirection)
     }
 
-    private fun correctShipDirection(){
-        shipDirection %= 360
-        if(shipDirection == -90){
-            shipDirection = 270
-        }else if(shipDirection == -270){
-            shipDirection = 90
-        }
-        shipDirection = abs(shipDirection)
-    }
-
     private fun rotateWaypointRight(degree: Int){
         val xDiff = xWaypointCoordinate - xFerryCoordinate
         val yDiff = yWaypointCoordinate - yFerryCoordinate
