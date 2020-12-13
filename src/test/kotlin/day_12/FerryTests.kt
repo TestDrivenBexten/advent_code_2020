@@ -25,6 +25,6 @@ class FerryTests {
 
         val ferry = Ferry(commandList)
         ferry.executeCommands()
-        assertEquals(25,ferry.getManhattanDistance())
+        assertEquals(998,ferry.getManhattanDistance())
     }
 }

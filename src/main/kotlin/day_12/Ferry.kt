@@ -63,7 +63,17 @@ class Ferry(commandList: List<String>) {
                 }
                 CommandType.Forward -> moveShipForward(command.magnitude)
             }
+            println(command)
+            print("Direction: ")
+            println(shipDirection)
+            print("Position: ")
+            print(xCoordinate)
+            print(" ")
+            println(yCoordinate)
+            print("Distance: ")
+            println(getManhattanDistance())
         }
+        println(ferryCommandList.size)
     }
 
     fun getManhattanDistance(): Int{
@@ -81,11 +91,23 @@ class Ferry(commandList: List<String>) {
 
     private fun rotateShipLeft(degree: Int){
         shipDirection -= degree
-        shipDirection = abs(shipDirection % 360)
+        shipDirection %= 360
+        if(shipDirection == -90){
+            shipDirection = 270
+        }else if(shipDirection == -270){
+            shipDirection = 90
+        }
+        shipDirection = abs(shipDirection)
     }
 
     private fun rotateShipRight(degree: Int){
         shipDirection += degree
-        shipDirection = abs(shipDirection % 360)
+        shipDirection %= 360
+        if(shipDirection == -90){
+            shipDirection = 270
+        }else if(shipDirection == -270){
+            shipDirection = 90
+        }
+        shipDirection = abs(shipDirection)
     }
 }
