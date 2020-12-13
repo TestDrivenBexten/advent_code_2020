@@ -91,17 +91,15 @@ class Ferry(commandList: List<String>) {
 
     private fun rotateShipLeft(degree: Int){
         shipDirection -= degree
-        shipDirection %= 360
-        if(shipDirection == -90){
-            shipDirection = 270
-        }else if(shipDirection == -270){
-            shipDirection = 90
-        }
-        shipDirection = abs(shipDirection)
+        correctShipDirection()
     }
 
     private fun rotateShipRight(degree: Int){
         shipDirection += degree
+        correctShipDirection()
+    }
+
+    private fun correctShipDirection(){
         shipDirection %= 360
         if(shipDirection == -90){
             shipDirection = 270
