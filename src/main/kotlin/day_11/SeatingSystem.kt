@@ -41,7 +41,6 @@ abstract class SeatingLayout(seatList: List<List<Seat>>){
             currentSeatingLayout = this.seatingLayoutList
             advanceRound()
             currentRun++
-            println(currentRun)
         }
     }
 
@@ -76,12 +75,6 @@ abstract class SeatingLayout(seatList: List<List<Seat>>){
             nextSeatingLayout.add(seatingRow)
         }
         seatingLayoutList = nextSeatingLayout
-    }
-
-    fun displayLayout(){
-        seatingLayoutList.map {
-            seatingRow -> println(seatingRow)
-        }
     }
 
     fun hasSameLayout(layout: SeatingLayout): Boolean {
