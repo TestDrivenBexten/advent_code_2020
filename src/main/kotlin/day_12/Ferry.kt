@@ -88,7 +88,7 @@ class Ferry(commandList: List<String>) {
                     rotateWaypointRight(command.magnitude)
                 }
                 CommandType.Left -> {
-                    //rotateShipLeft(command.magnitude)
+                    rotateWaypointLeft(command.magnitude)
                 }
                 CommandType.Forward -> moveWaypointForward(command.magnitude)
             }
@@ -129,7 +129,43 @@ class Ferry(commandList: List<String>) {
     }
 
     private fun rotateWaypointRight(degree: Int){
-        val correctedDegree = correctedDegree(degree)
+        val xDiff = xWaypointCoordinate - xFerryCoordinate
+        val yDiff = yWaypointCoordinate - yFerryCoordinate
+
+        when(correctedDegree(degree)){
+            90 -> {
+                xWaypointCoordinate = xFerryCoordinate + yDiff
+                yWaypointCoordinate = yFerryCoordinate - xDiff
+            }
+            180 -> {
+                xWaypointCoordinate = xFerryCoordinate - xDiff
+                yWaypointCoordinate = yFerryCoordinate - yDiff
+            }
+            270 -> {
+                xWaypointCoordinate = xFerryCoordinate - yDiff
+                yWaypointCoordinate = yFerryCoordinate + xDiff
+            }
+        }
+    }
+
+    private fun rotateWaypointLeft(degree: Int){
+        val xDiff = xWaypointCoordinate - xFerryCoordinate
+        val yDiff = yWaypointCoordinate - yFerryCoordinate
+
+        when(correctedDegree(degree)){
+            90 -> {
+                xWaypointCoordinate = xFerryCoordinate - yDiff
+                yWaypointCoordinate = yFerryCoordinate + xDiff
+            }
+            180 -> {
+                xWaypointCoordinate = xFerryCoordinate - xDiff
+                yWaypointCoordinate = yFerryCoordinate - yDiff
+            }
+            270 -> {
+                xWaypointCoordinate = xFerryCoordinate + yDiff
+                yWaypointCoordinate = yFerryCoordinate - xDiff
+            }
+        }
     }
 
     private fun correctedDegree(degree: Int): Int {
@@ -145,11 +181,15 @@ class Ferry(commandList: List<String>) {
     }
 
     private fun moveWaypointForward(magnitude: Int){
-//        when(shipDirection){
-//            0 -> xFerryCoordinate += magnitude
-//            90 -> yFerryCoordinate -= magnitude
-//            180 -> xFerryCoordinate -= magnitude
-//            270 -> yFerryCoordinate += magnitude
-//        }
+        val xDiff = xWaypointCoordinate - xFerryCoordinate
+        val yDiff = yWaypointCoordinate - yFerryCoordinate
+
+        val xMove = xDiff * magnitude
+        val yMove = yDiff * magnitude
+
+        xFerryCoordinate += xMove
+        xWaypointCoordinate += xMove
+        yFerryCoordinate += yMove
+        yWaypointCoordinate += yMove
     }
 }
