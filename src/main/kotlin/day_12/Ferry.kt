@@ -62,10 +62,6 @@ class Ferry(commandList: List<String>) {
                     rotateShipLeft(command.magnitude)
                 }
                 CommandType.Forward -> moveShipForward(command.magnitude)
-                else -> {
-                    print("Command not set up: ")
-                    println(command)
-                }
             }
         }
     }
