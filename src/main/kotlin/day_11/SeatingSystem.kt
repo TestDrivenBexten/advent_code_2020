@@ -9,6 +9,7 @@ enum class Seat {
 
 abstract class SeatingLayout(seatList: List<List<Seat>>){
     var seatingLayoutList = seatList
+    abstract var maxOccupiedSeat: Int
     companion object Factory {
         fun loadSeatingFromString(seatingList: List<String>, isComplicated: Boolean = false): SeatingLayout {
             val seatingLayout = mutableListOf<List<Seat>>()
@@ -63,7 +64,7 @@ abstract class SeatingLayout(seatList: List<List<Seat>>){
                     }
                 } else if (currentSeat == Seat.OCCUPIED) {
                     val occupiedSeatCount = countAdjacentOccupiedSeats(row, col)
-                    if(occupiedSeatCount >= 4){
+                    if(occupiedSeatCount >= maxOccupiedSeat){
                         seatingRow.add(Seat.EMPTY)
                     } else {
                         seatingRow.add(Seat.OCCUPIED)
@@ -103,6 +104,7 @@ abstract class SeatingLayout(seatList: List<List<Seat>>){
 }
 
 private class SimpleSeatingLayout(seatList: List<List<Seat>>): SeatingLayout(seatList) {
+    override var maxOccupiedSeat: Int = 4
     override fun countAdjacentOccupiedSeats(row: Int, col: Int): Int{
         val rowCount = seatingLayoutList.size
         val colCount = seatingLayoutList[0].size
@@ -151,7 +153,50 @@ private class SimpleSeatingLayout(seatList: List<List<Seat>>): SeatingLayout(sea
 }
 
 private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayout(seatList) {
+    override var maxOccupiedSeat: Int = 5
     override fun countAdjacentOccupiedSeats(row: Int, col: Int): Int {
-        TODO("Not yet implemented")
+        val rowCount = seatingLayoutList.size
+        val colCount = seatingLayoutList[0].size
+
+        var occupiedCount = 0
+
+        // Column Limits
+        val previousCol = max(0, col - 1)
+        val nextCol = min(colCount - 1, col + 1)
+
+        // Count previous row
+        if(row > 0){
+            val previousRow = row - 1
+            for(j in previousCol..nextCol){
+                val currentSeat = seatingLayoutList[previousRow][j]
+                if(currentSeat == Seat.OCCUPIED){
+                    occupiedCount++
+                }
+            }
+        }
+
+        // Count current row
+        for(j in previousCol..nextCol){
+            if(j == col){
+                continue
+            }
+            val currentSeat = seatingLayoutList[row][j]
+            if(currentSeat == Seat.OCCUPIED){
+                occupiedCount++
+            }
+        }
+
+        // Count next row
+        if(row < rowCount - 1){
+            val nextRow = row + 1
+            for(j in previousCol..nextCol){
+                val currentSeat = seatingLayoutList[nextRow][j]
+                if(currentSeat == Seat.OCCUPIED){
+                    occupiedCount++
+                }
+            }
+        }
+
+        return occupiedCount
     }
 }
