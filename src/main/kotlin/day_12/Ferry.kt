@@ -12,8 +12,8 @@ data class Command(val commandType: CommandType, val magnitude: Int)
 class Ferry(commandList: List<String>) {
     private val ferryCommandList: List<Command>
     private var shipDirection = 0
-    var xCoordinate = 0
-    var yCoordinate = 0
+    private var xFerryCoordinate = 0
+    private var yFerryCoordinate = 0
 
     private val commandRegex = "([A-Z])(\\d+)"
 
@@ -44,16 +44,16 @@ class Ferry(commandList: List<String>) {
         ferryCommandList.map { command ->
             when(command.commandType){
                 CommandType.North -> {
-                    yCoordinate += command.magnitude
+                    yFerryCoordinate += command.magnitude
                 }
                 CommandType.South -> {
-                    yCoordinate -= command.magnitude
+                    yFerryCoordinate -= command.magnitude
                 }
                 CommandType.West -> {
-                    xCoordinate -= command.magnitude
+                    xFerryCoordinate -= command.magnitude
                 }
                 CommandType.East -> {
-                    xCoordinate += command.magnitude
+                    xFerryCoordinate += command.magnitude
                 }
                 CommandType.Right -> {
                     rotateShipRight(command.magnitude)
@@ -66,16 +66,20 @@ class Ferry(commandList: List<String>) {
         }
     }
 
+    fun executeWaypointCommands(){
+
+    }
+
     fun getManhattanDistance(): Int{
-        return abs(xCoordinate) + abs(yCoordinate)
+        return abs(xFerryCoordinate) + abs(yFerryCoordinate)
     }
 
     private fun moveShipForward(magnitude: Int){
         when(shipDirection){
-            0 -> xCoordinate += magnitude
-            90 -> yCoordinate -= magnitude
-            180 -> xCoordinate -= magnitude
-            270 -> yCoordinate += magnitude
+            0 -> xFerryCoordinate += magnitude
+            90 -> yFerryCoordinate -= magnitude
+            180 -> xFerryCoordinate -= magnitude
+            270 -> yFerryCoordinate += magnitude
         }
     }
 

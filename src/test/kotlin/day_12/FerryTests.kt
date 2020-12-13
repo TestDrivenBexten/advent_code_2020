@@ -27,4 +27,15 @@ class FerryTests {
         ferry.executeCommands()
         assertEquals(998,ferry.getManhattanDistance())
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Small Waypoint Command List Should Have Manhattan Distance 286`(){
+        val path = Paths.get("src/test/kotlin/day_12/sample_command.txt")
+        val commandList = PuzzleInputReader.readStringListFromFile(path)
+
+        val ferry = Ferry(commandList)
+        ferry.executeWaypointCommands()
+        assertEquals(286,ferry.getManhattanDistance())
+    }
 }
