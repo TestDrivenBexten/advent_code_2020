@@ -157,43 +157,53 @@ private class ComplicatedSeatingLayout(seatList: List<List<Seat>>): SeatingLayou
     override fun countAdjacentOccupiedSeats(row: Int, col: Int): Int {
         val rowCount = seatingLayoutList.size
         val colCount = seatingLayoutList[0].size
-
         var occupiedCount = 0
 
-        // Column Limits
-        val previousCol = max(0, col - 1)
-        val nextCol = min(colCount - 1, col + 1)
+        var currentRow: Int
+        var currentCol: Int
+        var isOccupied: Boolean
 
-        // Count previous row
-        if(row > 0){
-            val previousRow = row - 1
-            for(j in previousCol..nextCol){
-                val currentSeat = seatingLayoutList[previousRow][j]
-                if(currentSeat == Seat.OCCUPIED){
-                    occupiedCount++
-                }
-            }
-        }
-
-        // Count current row
-        for(j in previousCol..nextCol){
-            if(j == col){
-                continue
-            }
-            val currentSeat = seatingLayoutList[row][j]
-            if(currentSeat == Seat.OCCUPIED){
+        // Check upper lefthand seats
+        currentRow = row - 1
+        currentCol = col -1
+        while(currentRow >= 0 &&  currentCol >= 0){
+            val currentCell = seatingLayoutList[currentRow][currentCol]
+            isOccupied = currentCell == Seat.OCCUPIED
+            if(isOccupied){
                 occupiedCount++
+                break
+            } else {
+                currentRow--
+                currentCol--
             }
         }
 
-        // Count next row
-        if(row < rowCount - 1){
-            val nextRow = row + 1
-            for(j in previousCol..nextCol){
-                val currentSeat = seatingLayoutList[nextRow][j]
-                if(currentSeat == Seat.OCCUPIED){
-                    occupiedCount++
-                }
+        // Check upper seats
+        currentRow = row - 1
+        currentCol = col
+        while(currentRow >= 0 &&  currentCol >= 0){
+            val currentCell = seatingLayoutList[currentRow][currentCol]
+            isOccupied = currentCell == Seat.OCCUPIED
+            if(isOccupied){
+                occupiedCount++
+                break
+            } else {
+                currentRow--
+            }
+        }
+
+        // Check upper righthand seats
+        currentRow = row - 1
+        currentCol = col + 1
+        while(currentRow >= 0 &&  currentCol < colCount){
+            val currentCell = seatingLayoutList[currentRow][currentCol]
+            isOccupied = currentCell == Seat.OCCUPIED
+            if(isOccupied){
+                occupiedCount++
+                break
+            } else {
+                currentRow--
+                currentCol++
             }
         }
 
