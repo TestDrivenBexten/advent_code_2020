@@ -63,17 +63,7 @@ class Ferry(commandList: List<String>) {
                 }
                 CommandType.Forward -> moveShipForward(command.magnitude)
             }
-            println(command)
-            print("Direction: ")
-            println(shipDirection)
-            print("Position: ")
-            print(xCoordinate)
-            print(" ")
-            println(yCoordinate)
-            print("Distance: ")
-            println(getManhattanDistance())
         }
-        println(ferryCommandList.size)
     }
 
     fun getManhattanDistance(): Int{
