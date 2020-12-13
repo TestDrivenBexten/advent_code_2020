@@ -15,6 +15,9 @@ class Ferry(commandList: List<String>) {
     private var xFerryCoordinate = 0
     private var yFerryCoordinate = 0
 
+    private var xWaypointCoordinate = 10
+    private var yWaypointCoordinate = 1
+
     private val commandRegex = "([A-Z])(\\d+)"
 
     init {
@@ -67,7 +70,29 @@ class Ferry(commandList: List<String>) {
     }
 
     fun executeWaypointCommands(){
-
+        ferryCommandList.map { command ->
+            when(command.commandType){
+                CommandType.North -> {
+                    yWaypointCoordinate += command.magnitude
+                }
+                CommandType.South -> {
+                    yWaypointCoordinate -= command.magnitude
+                }
+                CommandType.West -> {
+                   xWaypointCoordinate -= command.magnitude
+                }
+                CommandType.East -> {
+                    xWaypointCoordinate += command.magnitude
+                }
+                CommandType.Right -> {
+                    rotateWaypointRight(command.magnitude)
+                }
+                CommandType.Left -> {
+                    //rotateShipLeft(command.magnitude)
+                }
+                CommandType.Forward -> moveWaypointForward(command.magnitude)
+            }
+        }
     }
 
     fun getManhattanDistance(): Int{
@@ -85,12 +110,12 @@ class Ferry(commandList: List<String>) {
 
     private fun rotateShipLeft(degree: Int){
         shipDirection -= degree
-        correctShipDirection()
+        shipDirection = correctedDegree(shipDirection)
     }
 
     private fun rotateShipRight(degree: Int){
         shipDirection += degree
-        correctShipDirection()
+        shipDirection = correctedDegree(shipDirection)
     }
 
     private fun correctShipDirection(){
@@ -101,5 +126,30 @@ class Ferry(commandList: List<String>) {
             shipDirection = 90
         }
         shipDirection = abs(shipDirection)
+    }
+
+    private fun rotateWaypointRight(degree: Int){
+        val correctedDegree = correctedDegree(degree)
+    }
+
+    private fun correctedDegree(degree: Int): Int {
+        var correctedDegree = degree
+        correctedDegree %= 360
+        if(correctedDegree == -90){
+            correctedDegree = 270
+        }else if(correctedDegree == -270){
+            correctedDegree = 90
+        }
+        correctedDegree = abs(correctedDegree)
+        return correctedDegree
+    }
+
+    private fun moveWaypointForward(magnitude: Int){
+//        when(shipDirection){
+//            0 -> xFerryCoordinate += magnitude
+//            90 -> yFerryCoordinate -= magnitude
+//            180 -> xFerryCoordinate -= magnitude
+//            270 -> yFerryCoordinate += magnitude
+//        }
     }
 }
