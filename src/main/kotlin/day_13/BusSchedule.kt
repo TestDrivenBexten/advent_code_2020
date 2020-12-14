@@ -21,3 +21,7 @@ fun parseBusList(busString: String): List<Int> {
     val filteredIdList = busIdStringList.filter { it != "x" }
     return filteredIdList.map { it.toInt() }.sorted()
 }
+
+fun findSynchronizedTimestamp(busString: String): Long {
+    return 0
+}

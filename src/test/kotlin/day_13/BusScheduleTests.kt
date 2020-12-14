@@ -45,4 +45,16 @@ class BusScheduleTests {
         val productTimeDiffId = busId * (departureTimestamp - currentTimestamp)
         assertEquals(119, productTimeDiffId)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Small Bus Schedule Time Test`(){
+        val path = Paths.get("src/test/kotlin/day_13/small_schedule.txt")
+        val busInput = PuzzleInputReader.readStringListFromFile(path)
+
+        val busIdInput = busInput[1]
+
+        val timeStamp = findSynchronizedTimestamp(busIdInput)
+        assertEquals(1068781,timeStamp)
+    }
 }
