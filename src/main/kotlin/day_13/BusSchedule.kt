@@ -6,5 +6,7 @@ fun findNextBus(currentTimestamp: Int, busIdList: List<Int>): Bus {
 }
 
 fun parseBusList(busString: String): List<Int> {
-    return listOf()
+    val busIdStringList = busString.split(",")
+    val filteredIdList = busIdStringList.filter { it != "x" }
+    return filteredIdList.map { it.toInt() }.sorted()
 }
