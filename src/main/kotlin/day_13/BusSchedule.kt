@@ -47,7 +47,11 @@ fun findSynchronizedTimestamp(busString: String): Long {
         if(isValidTimestamp){
             return targetTimestamp
         }
-        targetTimestamp += 1
+        if(targetTimestamp == 0L && timeOffset > 0){
+            targetTimestamp = greatestId - timeOffset.toLong()
+        } else {
+            targetTimestamp += greatestId
+        }
     }
     return 0
 }
