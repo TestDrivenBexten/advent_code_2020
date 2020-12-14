@@ -28,4 +28,21 @@ class BusScheduleTests {
             { assertEquals(295, productTimeDiffId)}
         )
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Puzzle Bus Schedule Test`(){
+        val path = Paths.get("src/test/kotlin/day_13/puzzle_schedule.txt")
+        val busInput = PuzzleInputReader.readStringListFromFile(path)
+
+        val currentTimestamp = busInput[0].toInt()
+        val busIdInput = busInput[1]
+
+        val busIdList = parseBusList(busIdInput)
+
+        val (busId, departureTimestamp) = findNextBus(currentTimestamp,busIdList)
+
+        val productTimeDiffId = busId * (departureTimestamp - currentTimestamp)
+        assertEquals(119, productTimeDiffId)
+    }
 }
