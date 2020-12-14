@@ -3,6 +3,9 @@ package day_13
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 import util.PuzzleInputReader
 import java.nio.file.Paths
 
@@ -56,5 +59,17 @@ class BusScheduleTests {
 
         val timeStamp = findSynchronizedTimestamp(busIdInput)
         assertEquals(1068781,timeStamp)
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        "'67,7,59,61', 754018",
+        "'67,x,7,59,61',779210",
+        "'67,7,x,59,61',1261476",
+        "'1789,37,47,1889',1202161486"
+    )
+    fun `Additional Offset Tests`(busInput: String, expectedTimestamp: Long){
+        val actualTimestamp = findSynchronizedTimestamp(busInput)
+        assertEquals(expectedTimestamp,actualTimestamp)
     }
 }
