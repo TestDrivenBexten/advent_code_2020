@@ -41,9 +41,8 @@ fun findSynchronizedTimestamp(busString: String): Long {
     busOffsetList.sortByDescending { it.busId }
     val (greatestId, timeOffset) = busOffsetList[0]
 
-    println(busOffsetList)
     var targetTimestamp = 0L
-    while(targetTimestamp < 1076000L){
+    while(targetTimestamp < Long.MAX_VALUE){
         val isValidTimestamp = checkOffsetList(targetTimestamp, busOffsetList)
         if(isValidTimestamp){
             return targetTimestamp
