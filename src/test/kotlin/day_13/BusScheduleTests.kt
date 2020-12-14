@@ -9,7 +9,7 @@ import java.nio.file.Paths
 class BusScheduleTests {
     @Test
     @Throws(Exception::class)
-    fun `Small Ferry Command List Should Have Manhattan Distance 25`(){
+    fun `Small Bus Schedule Test`(){
         val path = Paths.get("src/test/kotlin/day_13/small_schedule.txt")
         val busInput = PuzzleInputReader.readStringListFromFile(path)
 
