@@ -37,27 +37,22 @@ fun findSynchronizedTimestamp(busString: String): Long {
     }
 
     busOffsetList.sortByDescending { it.busId }
-    val (greatestId, timeOffset) = busOffsetList[0]
 
+    var leastCommonMultiple = 1L
     var targetTimestamp = 0L
-    while(targetTimestamp < Long.MAX_VALUE){
-        val isValidTimestamp = checkOffsetList(targetTimestamp, busOffsetList)
-        if(isValidTimestamp){
-            return targetTimestamp
+    for(j in busOffsetList.indices){
+        val currentBusOffset = busOffsetList[j]
+        val (busId, timeOffset) = currentBusOffset
+        while((targetTimestamp + timeOffset.toLong() ) % busId != 0L){
+            targetTimestamp += leastCommonMultiple
         }
-        if(targetTimestamp == 0L && timeOffset > 0){
-            targetTimestamp = greatestId - timeOffset.toLong()
-        } else {
-            targetTimestamp += greatestId
-        }
+
+        val busSubList = busOffsetList.subList(0,j + 1)
+        leastCommonMultiple = findLeastCommonMultiple(busSubList)
     }
-    return 0
+    return targetTimestamp
 }
 
-private fun checkOffsetList(targetTimestamp: Long,
-                            busOffsetList: List<BusOffset>): Boolean{
-    return busOffsetList.all { busOffset ->
-        val (busId, timeOffset) = busOffset
-        (targetTimestamp + timeOffset.toLong() ) % busId == 0L
-    }
+private fun findLeastCommonMultiple(busOffsetList: List<BusOffset>): Long {
+    return busOffsetList.fold(1) { lcm, bus -> lcm * bus.busId }
 }
