@@ -1,7 +1,5 @@
 package day_13
 
-import java.sql.Timestamp
-
 data class Bus(val busId: Int, val timestamp: Int)
 
 fun findNextBus(currentTimestamp: Int, busIdList: List<Int>): Bus {
