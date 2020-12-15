@@ -2,6 +2,10 @@ package day_14
 
 import kotlin.math.pow
 
+fun findMemorySumOfBitProgram(instructionList: List<String>): Int {
+    return 0
+}
+
 fun applyBitmask(originalValue: Int, bitmask: String): Int {
     var binary = convertToBinary(originalValue)
     for(index in bitmask.indices){

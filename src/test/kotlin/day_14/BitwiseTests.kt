@@ -2,6 +2,8 @@ package day_14
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import util.PuzzleInputReader
+import java.nio.file.Paths
 
 class BitwiseTests {
 
@@ -24,5 +26,15 @@ class BitwiseTests {
         val bitmask = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X"
         val transformedValue = applyBitmask(0,bitmask)
         assertEquals(64,transformedValue)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Puzzle Bus Schedule Time Test`(){
+        val path = Paths.get("src/test/kotlin/day_14/small_bit_program.txt")
+        val bitProgram = PuzzleInputReader.readStringListFromFile(path)
+
+        val sum = findMemorySumOfBitProgram(bitProgram)
+        assertEquals(165,sum)
     }
 }
