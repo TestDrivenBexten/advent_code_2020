@@ -73,16 +73,15 @@ class BusScheduleTests {
         assertEquals(expectedTimestamp,actualTimestamp)
     }
 
-//    TODO Reduce algorithm runtime
-//    @Test
-//    @Throws(Exception::class)
-//    fun `Puzzle Bus Schedule Time Test`(){
-//        val path = Paths.get("src/test/kotlin/day_13/puzzle_schedule.txt")
-//        val busInput = PuzzleInputReader.readStringListFromFile(path)
-//
-//        val busIdInput = busInput[1]
-//
-//        val timeStamp = findSynchronizedTimestamp(busIdInput)
-//        assertEquals(1068781,timeStamp)
-//    }
+    @Test
+    @Throws(Exception::class)
+    fun `Puzzle Bus Schedule Time Test`(){
+        val path = Paths.get("src/test/kotlin/day_13/puzzle_schedule.txt")
+        val busInput = PuzzleInputReader.readStringListFromFile(path)
+
+        val busIdInput = busInput[1]
+
+        val timeStamp = findSynchronizedTimestamp(busIdInput)
+        assertEquals(1106724616194525L,timeStamp)
+    }
 }
