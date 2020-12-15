@@ -30,8 +30,18 @@ class BitwiseTests {
 
     @Test
     @Throws(Exception::class)
-    fun `Puzzle Bus Schedule Time Test`(){
+    fun `Small Bit Program Should Have Sum of 165`(){
         val path = Paths.get("src/test/kotlin/day_14/small_bit_program.txt")
+        val bitProgram = PuzzleInputReader.readStringListFromFile(path)
+
+        val sum = findMemorySumOfBitProgram(bitProgram)
+        assertEquals(165,sum)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Puzzle Bit Program Test`(){
+        val path = Paths.get("src/test/kotlin/day_14/puzzle_bit_program.txt")
         val bitProgram = PuzzleInputReader.readStringListFromFile(path)
 
         val sum = findMemorySumOfBitProgram(bitProgram)

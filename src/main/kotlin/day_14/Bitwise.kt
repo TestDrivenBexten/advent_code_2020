@@ -7,16 +7,24 @@ data class MemoryAddress(val address: Int, var storedValue: Int)
 
 fun findMemorySumOfBitProgram(instructionList: List<String>): Int {
     val memoryList = mutableListOf<MemoryAddress>()
-    val bitmask = instructionList.first().substring(7)
+
+    val maskRegex = "mask = (\\w+)"
+    val rMask = Pattern.compile(maskRegex)
 
     val memRegex = "mem\\[(\\d+)\\]\\s=\\s(\\d+)"
     val r = Pattern.compile(memRegex)
 
-    instructionList.drop(1).map {
-        val m = r.matcher(it)
-        if(m.matches()){
-            val memoryAddress = Integer.parseInt(m.group(1))
-            val rawValue = Integer.parseInt(m.group(2))
+    var bitmask = ""
+    for(index in instructionList.indices){
+        val instruction = instructionList[index]
+        val maskMatcher = rMask.matcher(instruction)
+        val memoryMatcher = r.matcher(instruction)
+
+        if(maskMatcher.matches()){
+            bitmask = maskMatcher.group(1)
+        }else if(memoryMatcher.matches()){
+            val memoryAddress = Integer.parseInt(memoryMatcher.group(1))
+            val rawValue = Integer.parseInt(memoryMatcher.group(2))
             val maskedValue = applyBitmask(rawValue,bitmask)
 
             val storedMemory = memoryList.find { x ->
