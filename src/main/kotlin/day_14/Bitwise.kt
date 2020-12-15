@@ -3,9 +3,9 @@ package day_14
 import java.util.regex.Pattern
 import kotlin.math.pow
 
-data class MemoryAddress(val address: Int, var storedValue: Int)
+data class MemoryAddress(val address: Int, var storedValue: Long)
 
-fun findMemorySumOfBitProgram(instructionList: List<String>): Int {
+fun findMemorySumOfBitProgram(instructionList: List<String>): Long {
     val memoryList = mutableListOf<MemoryAddress>()
 
     val maskRegex = "mask = (\\w+)"
@@ -42,7 +42,7 @@ fun findMemorySumOfBitProgram(instructionList: List<String>): Int {
     return memoryList.fold(0) { sum, memory -> sum + memory.storedValue }
 }
 
-fun applyBitmask(originalValue: Int, bitmask: String): Int {
+fun applyBitmask(originalValue: Int, bitmask: String): Long {
     var binary = convertToBinary(originalValue)
     for(index in bitmask.indices){
         val bitChar = bitmask[index]
@@ -58,13 +58,13 @@ private fun convertToBinary(decimal: Int): String {
     return binary.padStart(36,'0')
 }
 
-private fun convertToDecimal(binary: String): Int {
-    var decimalValue = 0
+private fun convertToDecimal(binary: String): Long {
+    var decimalValue = 0L
     val reversedBinary = binary.reversed()
     for(index in reversedBinary.indices){
         val bit = Integer.parseInt(reversedBinary[index].toString())
         if(bit == 1){
-            decimalValue += 2.0.pow(index).toInt()
+            decimalValue += 2.0.pow(index).toLong()
         }
     }
     return decimalValue

@@ -45,6 +45,6 @@ class BitwiseTests {
         val bitProgram = PuzzleInputReader.readStringListFromFile(path)
 
         val sum = findMemorySumOfBitProgram(bitProgram)
-        assertEquals(165,sum)
+        assertEquals(12408060320841L,sum)
     }
 }
