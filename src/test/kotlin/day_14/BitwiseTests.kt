@@ -47,4 +47,14 @@ class BitwiseTests {
         val sum = findMemorySumOfBitProgram(bitProgram)
         assertEquals(12408060320841L,sum)
     }
+
+    @Test
+    @Throws(Exception::class)
+    fun `Small Floating Program Should Have Sum of 165`(){
+        val path = Paths.get("src/test/kotlin/day_14/floating_bit_program.txt")
+        val bitProgram = PuzzleInputReader.readStringListFromFile(path)
+
+        val sum = findMemorySumOfFloatingProgram(bitProgram)
+        assertEquals(208,sum)
+    }
 }

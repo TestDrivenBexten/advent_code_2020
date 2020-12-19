@@ -5,6 +5,10 @@ import kotlin.math.pow
 
 data class MemoryAddress(val address: Int, var storedValue: Long)
 
+fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
+    return 0L
+}
+
 fun findMemorySumOfBitProgram(instructionList: List<String>): Long {
     val memoryList = mutableListOf<MemoryAddress>()
 
