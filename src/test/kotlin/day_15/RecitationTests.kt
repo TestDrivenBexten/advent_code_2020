@@ -1,0 +1,20 @@
+package day_15
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
+
+class RecitationTests {
+    @Test
+    fun `Small Recitation Examples`(){
+        assertAll(
+            { assertEquals(436,reciteMemory("0,3,6",2020)) },
+            { assertEquals(1,reciteMemory("1,3,2",2020)) },
+            { assertEquals(10,reciteMemory("2,1,3",2020)) },
+            { assertEquals(27,reciteMemory("1,2,3",2020)) },
+            { assertEquals(78,reciteMemory("2,3,1",2020)) },
+            { assertEquals(438,reciteMemory("3,2,1",2020)) },
+            { assertEquals(1836,reciteMemory("3,1,2",2020)) }
+        )
+    }
+}
