@@ -69,7 +69,7 @@ fun applyBitmask(originalValue: Int, bitmask: String): Long {
     for(index in bitmask.indices){
         val bitChar = bitmask[index]
         if(bitChar != 'X'){
-            binary = binary.substring(0,index) + bitChar + binary.substring(index + 1)
+            binary = replaceCharAtIndex(binary,index,bitChar)
         }
     }
     return convertToDecimal(binary)
@@ -77,16 +77,24 @@ fun applyBitmask(originalValue: Int, bitmask: String): Long {
 
 fun applyFloatingBitmask(originalValue: Int, bitmask: String): List<Long> {
     var binary = convertToBinary(originalValue)
-//    for(index in bitmask.indices){
-//        val bitChar = bitmask[index]
-//        if(bitChar != 'X'){
-//            binary = binary.substring(0,index) + bitChar + binary.substring(index + 1)
-//        }
-//    }
+    for(index in bitmask.indices){
+        val bitChar = bitmask[index]
+        if(bitChar == '1'){
+            binary = replaceCharAtIndex(binary,index,bitChar)
+        }
+
+        if(bitChar == 'X'){
+            val zeroBinary = replaceCharAtIndex(binary,index,'0')
+            val oneBinary = replaceCharAtIndex(binary,index,'1')
+        }
+    }
 //    return convertToDecimal(binary)
     return listOf()
 }
 
+private fun replaceCharAtIndex(source: String, index: Int, character: Char): String{
+    return source.substring(0,index) + character + source.substring(index + 1)
+}
 
 private fun convertToBinary(decimal: Int): String {
     val binary = Integer.toBinaryString(decimal)
