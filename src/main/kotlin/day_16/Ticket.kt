@@ -25,7 +25,21 @@ fun loadTicketConfig(rawInput: List<String>): TicketConfig{
 }
 
 fun combineTicketRanges(rangeList: List<FieldRange>): List<FieldRange>{
+    val newRangeList = mutableListOf<FieldRange>()
+
+    val rangeHead = rangeList.first()
+    val rangeTail = rangeList.drop(1)
+
     return listOf()
+}
+
+private fun hasRangeOverlap(firstRange: FieldRange, secondRange: FieldRange): Boolean {
+    val (firstMin, firstMax) = firstRange
+    val (secondMin, secondMax) = secondRange
+
+    val firstMinOverlap = firstMin > secondMin && firstMin < secondMax
+    val firstMaxOverlap = firstMax > secondMin && firstMax < secondMax
+    return firstMinOverlap || firstMaxOverlap
 }
 
 private fun readYourTicket(rawInput: List<String>): Ticket {
