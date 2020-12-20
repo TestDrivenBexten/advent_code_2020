@@ -14,7 +14,16 @@ data class TicketConfig(val ticketRuleList: List<TicketRule>,
 private const val fieldRuleRegex = "(.+):\\s(\\d+)-(\\d+)\\sor\\s(\\d+)-(\\d+)"
 
 fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
-    return 0
+    val fieldRangeList = ticketConfig.ticketRuleList.flatMap { listOf(it.lowerRange,it.upperRange) }
+    val nearbyFieldList = ticketConfig.nearbyTicketList.flatMap {  it.fieldValueList }
+
+    return nearbyFieldList.fold(0) { sum, field ->
+        if(isFieldWithinRange(field,fieldRangeList)){
+            sum
+        } else {
+            sum + field
+        }
+    }
 }
 
 fun loadTicketConfig(rawInput: List<String>): TicketConfig{
@@ -31,6 +40,10 @@ fun combineTicketRanges(rangeList: List<FieldRange>): List<FieldRange>{
     val rangeTail = rangeList.drop(1)
 
     return listOf()
+}
+
+private fun isFieldWithinRange(fieldValue: Int, fieldList: List<FieldRange>): Boolean{
+    return false
 }
 
 private fun hasRangeOverlap(firstRange: FieldRange, secondRange: FieldRange): Boolean {
