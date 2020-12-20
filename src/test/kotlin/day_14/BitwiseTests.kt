@@ -49,6 +49,13 @@ class BitwiseTests {
     }
 
     @Test
+    fun `Floating Bitmask on 42 should return 26, 27, 58 and 59`(){
+        val bitmask = "000000000000000000000000000000X1001X"
+        val transformedList = applyFloatingBitmask(42,bitmask)
+        assertEquals(listOf(26,27,58,59),transformedList)
+    }
+
+    @Test
     @Throws(Exception::class)
     fun `Small Floating Program Should Have Sum of 165`(){
         val path = Paths.get("src/test/kotlin/day_14/floating_bit_program.txt")
