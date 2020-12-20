@@ -23,7 +23,11 @@ fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
         if(maskMatcher.matches()){
             bitmask = maskMatcher.group(1)
         }else if(memoryMatcher.matches()){
-            // TODO
+            val memoryAddress = Integer.parseInt(memoryMatcher.group(1))
+            val rawValue = Integer.parseInt(memoryMatcher.group(2))
+            val addressList = applyFloatingBitmask(rawValue,bitmask)
+
+
         }
     }
 
@@ -49,15 +53,7 @@ fun findMemorySumOfBitProgram(instructionList: List<String>): Long {
             val rawValue = Integer.parseInt(memoryMatcher.group(2))
             val maskedValue = applyBitmask(rawValue,bitmask)
 
-            val storedMemory = memoryList.find { x ->
-                x.address == memoryAddress
-            }
-            if(storedMemory == null){
-                val memory = MemoryAddress(memoryAddress, maskedValue)
-                memoryList.add(memory)
-            }else{
-                storedMemory.storedValue = maskedValue
-            }
+            writeToMemory(memoryList,memoryAddress,maskedValue)
         }
     }
 
@@ -103,6 +99,19 @@ private fun replaceXInString(binary: String): List<String>{
         return zeroList + oneList
     } else {
         return listOf(binary)
+    }
+}
+
+private fun writeToMemory(memoryList: MutableList<MemoryAddress>,
+                          memoryAddress: Int, maskedValue: Long){
+    val storedMemory = memoryList.find { x ->
+        x.address == memoryAddress
+    }
+    if(storedMemory == null){
+        val memory = MemoryAddress(memoryAddress, maskedValue)
+        memoryList.add(memory)
+    }else{
+        storedMemory.storedValue = maskedValue
     }
 }
 
