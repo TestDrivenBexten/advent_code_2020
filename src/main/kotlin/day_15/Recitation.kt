@@ -14,14 +14,14 @@ fun reciteMemory(stringInput: String, iterationCount: Int): Int{
     var numberSpoken = 0
     currentTurn++
     while(currentTurn <= iterationCount){
+        val previousTurn = currentTurn - 1
         if(numberRecordMap.containsKey(numberSpoken)){
             val lastTurn = numberRecordMap[numberSpoken]
-            val previousTurn = currentTurn - 1
             val turnDiff = previousTurn - lastTurn!!
             numberRecordMap[numberSpoken] = previousTurn
             numberSpoken = turnDiff
         } else {
-            numberRecordMap[numberSpoken] = currentTurn
+            numberRecordMap[numberSpoken] = previousTurn
             numberSpoken = 0
         }
         currentTurn++
