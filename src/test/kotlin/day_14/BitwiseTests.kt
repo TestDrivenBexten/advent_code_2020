@@ -2,6 +2,7 @@ package day_14
 
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import util.PuzzleInputReader
 import java.nio.file.Paths
@@ -72,6 +73,7 @@ class BitwiseTests {
     }
 
     @Test
+    @Tag("slow")
     @Throws(Exception::class)
     fun `Puzzle Floating Bit Program Test`(){
         val path = Paths.get("src/test/kotlin/day_14/puzzle_bit_program.txt")
