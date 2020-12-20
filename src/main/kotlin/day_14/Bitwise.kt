@@ -9,7 +9,25 @@ const val maskRegex = "mask = (\\w+)"
 const val memRegex = "mem\\[(\\d+)\\]\\s=\\s(\\d+)"
 
 fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
-    return 0L
+    val memoryList = mutableListOf<MemoryAddress>()
+
+    val rMask = Pattern.compile(maskRegex)
+    val r = Pattern.compile(memRegex)
+
+    var bitmask = ""
+    for(index in instructionList.indices){
+        val instruction = instructionList[index]
+        val maskMatcher = rMask.matcher(instruction)
+        val memoryMatcher = r.matcher(instruction)
+
+        if(maskMatcher.matches()){
+            bitmask = maskMatcher.group(1)
+        }else if(memoryMatcher.matches()){
+            // TODO
+        }
+    }
+
+    return memoryList.fold(0) { sum, memory -> sum + memory.storedValue }
 }
 
 fun findMemorySumOfBitProgram(instructionList: List<String>): Long {
