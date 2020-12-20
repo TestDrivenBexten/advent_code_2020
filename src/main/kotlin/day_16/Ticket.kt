@@ -18,7 +18,9 @@ fun loadTicketConfig(rawInput: List<String>): TicketConfig{
 }
 
 private fun readYourTicket(rawInput: List<String>): Ticket {
-    return Ticket(listOf(1))
+    val ticketIndex = rawInput.indexOf("your ticket:") + 1
+    val ticketInput = rawInput[ticketIndex]
+    return readTicket(ticketInput)
 }
 
 private fun readNearbyTicketList(rawInput: List<String>): List<Ticket> {
@@ -29,6 +31,7 @@ private fun readTicketRules(){
 
 }
 
-private fun readTicket(){
-
+private fun readTicket(ticketInput: String): Ticket{
+    val fieldValueList = ticketInput.split(",").map { Integer.parseInt(it) }
+    return Ticket(fieldValueList)
 }
