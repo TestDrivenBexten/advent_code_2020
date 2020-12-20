@@ -12,9 +12,17 @@ fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
 fun loadTicketConfig(rawInput: List<String>): TicketConfig{
 
 
-    val yourTicket = Ticket(listOf(1))
-    val nearbyTicketList = listOf(Ticket(listOf(3)))
+    val yourTicket = readYourTicket(rawInput)
+    val nearbyTicketList = readNearbyTicketList(rawInput)
     return TicketConfig(yourTicket, nearbyTicketList)
+}
+
+private fun readYourTicket(rawInput: List<String>): Ticket {
+    return Ticket(listOf(1))
+}
+
+private fun readNearbyTicketList(rawInput: List<String>): List<Ticket> {
+    return listOf(Ticket(listOf(3)))
 }
 
 private fun readTicketRules(){
