@@ -3,7 +3,7 @@ package day_14
 import java.util.regex.Pattern
 import kotlin.math.pow
 
-data class MemoryAddress(val address: Int, var storedValue: Long)
+data class MemoryAddress(val address: Long, var storedValue: Long)
 
 const val maskRegex = "mask = (\\w+)"
 const val memRegex = "mem\\[(\\d+)\\]\\s=\\s(\\d+)"
@@ -27,7 +27,7 @@ fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
             val rawValue = Integer.parseInt(memoryMatcher.group(2))
             val addressList = applyFloatingBitmask(memoryAddress,bitmask)
 
-            addressList.map { writeToMemory(memoryList, it.toInt(), rawValue.toLong()) }
+            addressList.map { writeToMemory(memoryList, it, rawValue.toLong()) }
         }
     }
 
@@ -53,7 +53,7 @@ fun findMemorySumOfBitProgram(instructionList: List<String>): Long {
             val rawValue = Integer.parseInt(memoryMatcher.group(2))
             val maskedValue = applyBitmask(rawValue,bitmask)
 
-            writeToMemory(memoryList,memoryAddress,maskedValue)
+            writeToMemory(memoryList,memoryAddress.toLong(),maskedValue)
         }
     }
 
@@ -103,7 +103,7 @@ private fun replaceXInString(binary: String): List<String>{
 }
 
 private fun writeToMemory(memoryList: MutableList<MemoryAddress>,
-                          memoryAddress: Int, maskedValue: Long){
+                          memoryAddress: Long, maskedValue: Long){
     val storedMemory = memoryList.find { x ->
         x.address == memoryAddress
     }
