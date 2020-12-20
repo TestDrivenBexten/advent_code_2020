@@ -1,5 +1,6 @@
 package day_14
 
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import util.PuzzleInputReader
@@ -52,7 +53,12 @@ class BitwiseTests {
     fun `Floating Bitmask on 42 should return 26, 27, 58 and 59`(){
         val bitmask = "000000000000000000000000000000X1001X"
         val transformedList = applyFloatingBitmask(42,bitmask)
-        assertEquals(listOf(26,27,58,59),transformedList)
+        assertAll(
+                {assertEquals(26,transformedList[0])},
+                {assertEquals(27,transformedList[1])},
+                {assertEquals(58,transformedList[2])},
+                {assertEquals(59,transformedList[3])}
+        )
     }
 
     @Test
