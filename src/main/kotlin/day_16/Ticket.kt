@@ -43,7 +43,7 @@ fun combineTicketRanges(rangeList: List<FieldRange>): List<FieldRange>{
 }
 
 private fun isFieldWithinRange(fieldValue: Int, fieldList: List<FieldRange>): Boolean{
-    return false
+    return fieldList.any { it.rangeMin <= fieldValue && it.rangeMax >= fieldValue}
 }
 
 private fun hasRangeOverlap(firstRange: FieldRange, secondRange: FieldRange): Boolean {
