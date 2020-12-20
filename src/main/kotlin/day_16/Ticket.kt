@@ -24,7 +24,9 @@ private fun readYourTicket(rawInput: List<String>): Ticket {
 }
 
 private fun readNearbyTicketList(rawInput: List<String>): List<Ticket> {
-    return listOf(Ticket(listOf(3)))
+    val ticketListIndex = rawInput.indexOf("nearby tickets:") + 1
+    val ticketInputList = rawInput.subList(ticketListIndex,rawInput.size)
+    return ticketInputList.map { readTicket(it) }
 }
 
 private fun readTicketRules(){
