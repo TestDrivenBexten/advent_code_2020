@@ -17,4 +17,9 @@ class RecitationTests {
             { assertEquals(1836,reciteMemory("3,1,2",2020)) }
         )
     }
+
+    @Test
+    fun `Puzzle Recitation Test`(){
+        assertEquals(1009,reciteMemory("2,0,1,9,5,19",2020))
+    }
 }
