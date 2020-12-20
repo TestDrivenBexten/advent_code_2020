@@ -3,6 +3,8 @@ package day_16
 data class Ticket(val fieldValueList: List<Int>)
 data class TicketConfig(val yourTicket: Ticket, val nearbyTicketList: List<Ticket>)
 
+private val fieldRuleRegex = "(.+):\\s(\\d+)-(\\d+)\\sor\\s(\\d+)-(\\d+)"
+
 fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
     return 0
 }
