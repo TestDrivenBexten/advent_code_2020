@@ -24,6 +24,10 @@ fun loadTicketConfig(rawInput: List<String>): TicketConfig{
     return TicketConfig(ticketRuleList, yourTicket, nearbyTicketList)
 }
 
+fun combineTicketRanges(rangeList: List<FieldRange>): List<FieldRange>{
+    return listOf()
+}
+
 private fun readYourTicket(rawInput: List<String>): Ticket {
     val ticketIndex = rawInput.indexOf("your ticket:") + 1
     val ticketInput = rawInput[ticketIndex]
