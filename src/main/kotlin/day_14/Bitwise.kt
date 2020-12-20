@@ -5,6 +5,9 @@ import kotlin.math.pow
 
 data class MemoryAddress(val address: Int, var storedValue: Long)
 
+const val maskRegex = "mask = (\\w+)"
+const val memRegex = "mem\\[(\\d+)\\]\\s=\\s(\\d+)"
+
 fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
     return 0L
 }
@@ -12,10 +15,7 @@ fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
 fun findMemorySumOfBitProgram(instructionList: List<String>): Long {
     val memoryList = mutableListOf<MemoryAddress>()
 
-    val maskRegex = "mask = (\\w+)"
     val rMask = Pattern.compile(maskRegex)
-
-    val memRegex = "mem\\[(\\d+)\\]\\s=\\s(\\d+)"
     val r = Pattern.compile(memRegex)
 
     var bitmask = ""
