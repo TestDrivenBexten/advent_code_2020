@@ -1,6 +1,7 @@
 package day_15
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
@@ -24,6 +25,7 @@ class RecitationTests {
     }
 
     @Test
+    @Tag("slow")
     fun `Large Recitation Examples`(){
         assertAll(
                 { assertEquals(175594,reciteMemory("0,3,6",30000000)) },
@@ -36,8 +38,8 @@ class RecitationTests {
         )
     }
 
-
     @Test
+    @Tag("slow")
     fun `Puzzle Large Recitation Test`(){
         assertEquals(62714,reciteMemory("2,0,1,9,5,19",30000000))
     }

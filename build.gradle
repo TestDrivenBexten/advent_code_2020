@@ -23,7 +23,9 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags 'slow'
+    }
     testLogging {
         events("failed")
     }
