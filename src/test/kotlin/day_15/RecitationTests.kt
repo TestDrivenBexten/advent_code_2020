@@ -36,4 +36,9 @@ class RecitationTests {
         )
     }
 
+
+    @Test
+    fun `Puzzle Large Recitation Test`(){
+        assertEquals(62714,reciteMemory("2,0,1,9,5,19",30000000))
+    }
 }
