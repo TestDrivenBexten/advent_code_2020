@@ -25,9 +25,9 @@ fun findMemorySumOfFloatingProgram(instructionList: List<String>): Long {
         }else if(memoryMatcher.matches()){
             val memoryAddress = Integer.parseInt(memoryMatcher.group(1))
             val rawValue = Integer.parseInt(memoryMatcher.group(2))
-            val addressList = applyFloatingBitmask(rawValue,bitmask)
+            val addressList = applyFloatingBitmask(memoryAddress,bitmask)
 
-
+            addressList.map { writeToMemory(memoryList, it.toInt(), rawValue.toLong()) }
         }
     }
 
