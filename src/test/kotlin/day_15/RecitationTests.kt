@@ -22,4 +22,18 @@ class RecitationTests {
     fun `Puzzle Recitation Test`(){
         assertEquals(1009,reciteMemory("2,0,1,9,5,19",2020))
     }
+
+    @Test
+    fun `Large Recitation Examples`(){
+        assertAll(
+                { assertEquals(175594,reciteMemory("0,3,6",30000000)) },
+                { assertEquals(2578,reciteMemory("1,3,2",30000000)) },
+                { assertEquals(3544142,reciteMemory("2,1,3",30000000)) },
+                { assertEquals(261214,reciteMemory("1,2,3",30000000)) },
+                { assertEquals(6895259,reciteMemory("2,3,1",30000000)) },
+                { assertEquals(18,reciteMemory("3,2,1",30000000)) },
+                { assertEquals(362,reciteMemory("3,1,2",30000000)) }
+        )
+    }
+
 }
