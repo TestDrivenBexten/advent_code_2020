@@ -26,8 +26,14 @@ fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
     }
 }
 
-fun getDepartureProduct(ticketConfig: TicketConfig): Int {
-    return -1
+fun getDepartureProduct(ticketConfig: TicketConfig): Long {
+    val fieldOrderMap = getTicketFieldOrder(ticketConfig)
+    val departureColumnList = fieldOrderMap.filter { it.key.startsWith("departure") }.map { it.value - 1 }
+    val ticketFieldList = ticketConfig.yourTicket.fieldValueList
+            .filterIndexed { index, i -> departureColumnList.any { it == index } }
+    return ticketFieldList.fold(1L ) {
+        product, field -> product * field
+    }
 }
 
 fun getTicketFieldOrder(ticketConfig: TicketConfig): Map<String, Int> {

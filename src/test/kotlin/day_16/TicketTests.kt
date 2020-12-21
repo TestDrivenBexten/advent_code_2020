@@ -52,7 +52,7 @@ class TicketTests {
 
         val ticketConfig = loadTicketConfig(rawConfig)
         val departureProduct = getDepartureProduct(ticketConfig)
-        assertEquals(0,departureProduct)
+        assertEquals(1429779530273L,departureProduct)
     }
 
     @Test
