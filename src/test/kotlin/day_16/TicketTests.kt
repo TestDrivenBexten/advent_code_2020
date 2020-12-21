@@ -46,6 +46,16 @@ class TicketTests {
     }
 
     @Test
+    fun `Puzzle Ticket Config Departure Product`(){
+        val path = Paths.get("src/test/kotlin/day_16/puzzle_ticket.txt")
+        val rawConfig = PuzzleInputReader.readStringListFromFile(path)
+
+        val ticketConfig = loadTicketConfig(rawConfig)
+        val departureProduct = getDepartureProduct(ticketConfig)
+        assertEquals(0,departureProduct)
+    }
+
+    @Test
     @Tag("skipped") // May implement later
     fun `Combine Ticket Fields Ranges`(){
         val rangeList = listOf(

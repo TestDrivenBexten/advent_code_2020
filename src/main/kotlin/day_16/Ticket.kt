@@ -26,6 +26,10 @@ fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
     }
 }
 
+fun getDepartureProduct(ticketConfig: TicketConfig): Int {
+    return -1
+}
+
 fun getTicketFieldOrder(ticketConfig: TicketConfig): Map<String, Int> {
     val fieldOrderMap = mutableMapOf<String,Int>()
 
