@@ -28,6 +28,20 @@ fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
 
 fun getTicketFieldOrder(ticketConfig: TicketConfig): Map<String, Int> {
     val fieldOrderMap = mutableMapOf<String,Int>()
+
+    val validTicketList = ticketConfig.nearbyTicketList
+            .filter { isTicketValid(it,ticketConfig.ticketRuleList) }
+
+    val ticketColumnList = mutableMapOf<Int,List<Int>>()
+    val fieldCount = ticketConfig.ticketRuleList.size
+    for(index in 0 until fieldCount){
+        ticketColumnList[index] = validTicketList.map { it.fieldValueList[index] }
+    }
+    // For each field, return a list of possible field values
+    // If a field has a single column, add to ordering
+    // Else check current columns and eliminate from possibilities
+    // Repeat until all fields set
+
     return fieldOrderMap
 }
 
@@ -45,6 +59,11 @@ fun combineTicketRanges(rangeList: List<FieldRange>): List<FieldRange>{
     val rangeTail = rangeList.drop(1)
 
     return listOf()
+}
+
+private fun isTicketValid(ticket: Ticket, ticketRuleList: List<TicketRule>): Boolean {
+    val fieldRangeList = ticketRuleList.flatMap { listOf(it.lowerRange,it.upperRange) }
+    return ticket.fieldValueList.all { isFieldWithinRange(it, fieldRangeList) }
 }
 
 private fun isFieldWithinRange(fieldValue: Int, fieldList: List<FieldRange>): Boolean{
