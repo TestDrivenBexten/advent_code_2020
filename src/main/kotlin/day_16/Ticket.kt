@@ -37,10 +37,28 @@ fun getTicketFieldOrder(ticketConfig: TicketConfig): Map<String, Int> {
     for(index in 0 until fieldCount){
         ticketColumnList[index] = validTicketList.map { it.fieldValueList[index] }
     }
-    // For each field, return a list of possible field values
-    // If a field has a single column, add to ordering
-    // Else check current columns and eliminate from possibilities
-    // Repeat until all fields set
+
+    val possibleFieldOrderMap = mutableMapOf<Int,MutableList<TicketRule>>()
+    for(index in 0 until fieldCount){
+        val ticketColumn = ticketColumnList[index]
+        val ruleList = ticketConfig.ticketRuleList
+        val possibleFieldList = ruleList.filter { rule ->
+            ticketColumn!!.all { isFieldWithinRange(it, listOf(rule.lowerRange,rule.upperRange)) }
+        }
+        possibleFieldOrderMap.put(index + 1,possibleFieldList.toMutableList())
+    }
+
+    while(possibleFieldOrderMap.isNotEmpty()){
+        val soleFieldList = possibleFieldOrderMap.filter { it.value.size == 1 }
+        soleFieldList.map { fieldOrderMap.put(it.value.first().fieldName,it.key) }
+        soleFieldList.map { possibleFieldOrderMap.remove(it.key) }
+
+        possibleFieldOrderMap.map { possibleFieldOrder ->
+            val possibleColumnList = possibleFieldOrder.value.map { it }
+            val remainingColumnList = possibleColumnList.filterNot { fieldOrderMap.containsKey(it.fieldName) }
+            possibleFieldOrderMap.put(possibleFieldOrder.key,remainingColumnList.toMutableList())
+        }
+    }
 
     return fieldOrderMap
 }
