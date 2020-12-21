@@ -21,6 +21,20 @@ class TicketTests {
     }
 
     @Test
+    fun `Small Config Should Have Correct Ordering of Fields`(){
+        val path = Paths.get("src/test/kotlin/day_16/small_ordering.txt")
+        val rawConfig = PuzzleInputReader.readStringListFromFile(path)
+
+        val ticketConfig = loadTicketConfig(rawConfig)
+        val fieldOrderMap = getTicketFieldOrder(ticketConfig)
+        assertAll(
+            { assertEquals(1,fieldOrderMap.get("row")) },
+            { assertEquals(2,fieldOrderMap.get("class")) },
+            { assertEquals(3,fieldOrderMap.get("seat")) },
+        )
+    }
+
+    @Test
     fun `Puzzle Ticket Config Error Rate`(){
         val path = Paths.get("src/test/kotlin/day_16/puzzle_ticket.txt")
         val rawConfig = PuzzleInputReader.readStringListFromFile(path)

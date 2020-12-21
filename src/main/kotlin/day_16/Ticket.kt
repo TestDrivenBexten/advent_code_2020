@@ -26,6 +26,11 @@ fun getTicketErrorRate(ticketConfig: TicketConfig): Int {
     }
 }
 
+fun getTicketFieldOrder(ticketConfig: TicketConfig): Map<String, Int> {
+    val fieldOrderMap = mutableMapOf<String,Int>()
+    return fieldOrderMap
+}
+
 fun loadTicketConfig(rawInput: List<String>): TicketConfig{
     val ticketRuleList = readTicketRuleList(rawInput)
     val yourTicket = readYourTicket(rawInput)
