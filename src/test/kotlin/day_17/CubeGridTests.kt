@@ -2,8 +2,13 @@ package day_17
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
+import org.junit.jupiter.params.provider.MethodSource
 import util.PuzzleInputReader
 import java.nio.file.Paths
+import java.util.stream.Stream
 
 class CubeGridTests {
 
@@ -14,6 +19,27 @@ class CubeGridTests {
 
         val cubeGrid = loadCubeGridFromLayout(smallLayout)
         assertEquals(5, cubeGrid.getActiveCubeCount())
+    }
+
+    @ParameterizedTest
+    @MethodSource("cubeNeighborProvider")
+    fun `Cube Neighbors for 0,0,0`(candidateCube: Cube, isNeighbor: Boolean){
+        val currentCube = Cube(0, 0, 0, true)
+        val neighborStatus = isNeighborToCube(currentCube, candidateCube)
+        assertEquals(isNeighbor, neighborStatus)
+    }
+
+    companion object {
+        @JvmStatic
+        fun cubeNeighborProvider(): Stream<Arguments?>? {
+            return Stream.of(
+                arguments(Cube(-1,0,0, true), true),
+                arguments(Cube(0,-1,0, true), true),
+                arguments(Cube(1,-1,0, true), true),
+                arguments(Cube(1,-2,0, true), false),
+                arguments(Cube(1,-1,2, true), false),
+            )
+        }
     }
 
     @Test

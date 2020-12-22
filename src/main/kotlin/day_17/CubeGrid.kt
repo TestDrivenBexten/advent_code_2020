@@ -23,3 +23,7 @@ fun loadCubeGridFromLayout(layout: List<String>): CubeGrid{
     }
     return CubeGrid(cubeList)
 }
+
+fun isNeighborToCube(cube1: Cube, cube2: Cube): Boolean {
+    return false
+}
