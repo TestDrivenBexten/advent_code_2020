@@ -5,11 +5,30 @@ import kotlin.math.abs
 data class Cube(val x: Int, val y: Int, val z: Int, val active: Boolean)
 class CubeGrid(private val cubeList: List<Cube>) {
     fun advanceCycle(){
-        // TODO
+        expandCube()
     }
 
     fun getActiveCubeCount(): Int{
         return cubeList.count { it.active }
+    }
+
+    fun expandCube() {
+        val minX = cubeList.minOf { it.x }
+        val maxX = cubeList.maxOf { it.x }
+
+        val minY = cubeList.minOf { it.y }
+        val maxY = cubeList.maxOf { it.y }
+
+        val minZ = cubeList.minOf { it.z }
+        val maxZ = cubeList.maxOf { it.z }
+
+        val emptyCubeList = (minX - 1..maxX + 1).flatMap { x ->
+            (minY - 1..maxY + 1).flatMap { y ->
+                (minZ - 1..maxZ + 1).map { z ->
+                    Cube(x,y,z,false)
+                }
+            }
+        }
     }
 }
 
