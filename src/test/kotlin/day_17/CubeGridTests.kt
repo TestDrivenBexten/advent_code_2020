@@ -15,4 +15,14 @@ class CubeGridTests {
         val cubeGrid = loadCubeGridFromLayout(smallLayout)
         assertEquals(5, cubeGrid.getActiveCubeCount())
     }
+
+    @Test
+    fun `Cube Grid Advanced One Cycle Should Have 11 Active Cubes`(){
+        val path = Paths.get("src/test/kotlin/day_17/small_layout.txt")
+        val smallLayout = PuzzleInputReader.readStringListFromFile(path)
+
+        val cubeGrid = loadCubeGridFromLayout(smallLayout)
+        cubeGrid.advanceCycle()
+        assertEquals(11, cubeGrid.getActiveCubeCount())
+    }
 }

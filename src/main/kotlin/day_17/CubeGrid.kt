@@ -2,6 +2,10 @@ package day_17
 
 data class Cube(val x: Int, val y: Int, val z: Int, val active: Boolean)
 class CubeGrid(private val cubeList: List<Cube>) {
+    fun advanceCycle(){
+        // TODO
+    }
+
     fun getActiveCubeCount(): Int{
         return cubeList.count { it.active }
     }
