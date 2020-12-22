@@ -1,14 +1,21 @@
 package day_17
 
-data class Cube(val x: Int, val y: Int, val z: Int)
-class CubeGrid(val cubeMap: Map<Long,Cube>) {
+data class Cube(val x: Int, val y: Int, val z: Int, val active: Boolean)
+class CubeGrid(private val cubeList: List<Cube>) {
     fun getActiveCubeCount(): Int{
-        return 0
+        return cubeList.count { it.active }
     }
 }
 
 fun loadCubeGridFromLayout(layout: List<String>): CubeGrid{
-    val cubeMap = mapOf<Long,Cube>()
-
-    return CubeGrid(mapOf())
+    val cubeList = layout.flatMapIndexed { rowIndex, layoutRow ->
+        layoutRow.mapIndexed { colIndex, cubeChar ->
+            if(cubeChar == '#'){
+                Cube(colIndex,rowIndex,0,true)
+            } else {
+                Cube(colIndex,rowIndex,0,false)
+            }
+        }
+    }
+    return CubeGrid(cubeList)
 }
