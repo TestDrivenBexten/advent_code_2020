@@ -3,7 +3,7 @@ package day_17
 import kotlin.math.abs
 
 data class Cube(val x: Int, val y: Int, val z: Int, val active: Boolean)
-class CubeGrid(private val cubeList: List<Cube>) {
+class CubeGrid(private var cubeList: List<Cube>) {
     fun advanceCycle(){
         expandCube()
     }
@@ -29,6 +29,9 @@ class CubeGrid(private val cubeList: List<Cube>) {
                 }
             }
         }
+
+        // TODO Replace inactive cubes with active cubes
+        cubeList = emptyCubeList
     }
 }
 
