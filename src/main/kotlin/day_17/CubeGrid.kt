@@ -1,5 +1,7 @@
 package day_17
 
+import kotlin.math.abs
+
 data class Cube(val x: Int, val y: Int, val z: Int, val active: Boolean)
 class CubeGrid(private val cubeList: List<Cube>) {
     fun advanceCycle(){
@@ -25,5 +27,8 @@ fun loadCubeGridFromLayout(layout: List<String>): CubeGrid{
 }
 
 fun isNeighborToCube(cube1: Cube, cube2: Cube): Boolean {
-    return false
+    if (abs(cube1.x - cube2.x) > 1) return false
+    if (abs(cube1.y - cube2.y) > 1) return false
+    if (abs(cube1.z - cube2.z) > 1) return false
+    return true
 }
