@@ -25,12 +25,12 @@ class CubeGrid(private var cubeList: List<Cube>) {
         val emptyCubeList = (minX - 1..maxX + 1).flatMap { x ->
             (minY - 1..maxY + 1).flatMap { y ->
                 (minZ - 1..maxZ + 1).map { z ->
-                    Cube(x,y,z,false)
+                    val isActiveCube = cubeList.count { it.x == x && it.y == y && it.z == z && it.active } == 1
+                    Cube(x,y,z,isActiveCube)
                 }
             }
         }
 
-        // TODO Replace inactive cubes with active cubes
         cubeList = emptyCubeList
     }
 }
