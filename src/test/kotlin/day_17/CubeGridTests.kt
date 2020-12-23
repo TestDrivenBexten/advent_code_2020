@@ -38,6 +38,7 @@ class CubeGridTests {
                 arguments(Cube(1,-1,0, true), true),
                 arguments(Cube(1,-2,0, true), false),
                 arguments(Cube(1,-1,2, true), false),
+                arguments(Cube(0,0,0, true), false),
             )
         }
     }
