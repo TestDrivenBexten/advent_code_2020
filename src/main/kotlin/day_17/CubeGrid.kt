@@ -8,7 +8,6 @@ class CubeGrid(private var cubeList: List<Cube>) {
         expandCube()
         val nextCubeList = cubeList.map {
             val neighborCount = getActiveNeighborCount(it)
-            println(neighborCount)
             if(it.active){
                 if(neighborCount == 2 || neighborCount == 3){
                     it
