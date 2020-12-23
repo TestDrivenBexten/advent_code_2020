@@ -30,8 +30,7 @@ class CubeGrid(private var cubeList: List<Cube>) {
     }
 
     private fun getActiveNeighborCount(cube: Cube): Int{
-        return cubeList.count { abs(it.x - cube.x) <= 1 && abs(it.y - cube.y) <= 1
-                && abs(it.z - cube.z) <= 1 && it.active }
+        return cubeList.count { isNeighborToCube(cube,it) && it.active }
     }
 
     private fun expandCube() {
