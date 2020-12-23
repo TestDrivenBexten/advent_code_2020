@@ -6,13 +6,36 @@ data class Cube(val x: Int, val y: Int, val z: Int, val active: Boolean)
 class CubeGrid(private var cubeList: List<Cube>) {
     fun advanceCycle(){
         expandCube()
+        val nextCubeList = cubeList.map {
+            val neighborCount = getActiveNeighborCount(it)
+            println(neighborCount)
+            if(it.active){
+                if(neighborCount == 2 || neighborCount == 3){
+                    it
+                } else {
+                    Cube(it.x,it.y,it.z,false)
+                }
+            } else {
+                if(neighborCount == 3){
+                    Cube(it.x,it.y,it.z,true)
+                } else {
+                    it
+                }
+            }
+        }
+        cubeList = nextCubeList
     }
 
     fun getActiveCubeCount(): Int{
         return cubeList.count { it.active }
     }
 
-    fun expandCube() {
+    private fun getActiveNeighborCount(cube: Cube): Int{
+        return cubeList.count { abs(it.x - cube.x) <= 1 && abs(it.y - cube.y) <= 1
+                && abs(it.z - cube.z) <= 1 && it.active }
+    }
+
+    private fun expandCube() {
         val minX = cubeList.minOf { it.x }
         val maxX = cubeList.maxOf { it.x }
 
