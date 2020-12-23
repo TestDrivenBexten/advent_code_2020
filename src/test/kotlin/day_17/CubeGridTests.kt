@@ -92,4 +92,16 @@ class CubeGridTests {
         }
         assertEquals(112, cubeGrid.getActiveCubeCount())
     }
+
+    @Test
+    fun `Problem 17 Part 1`(){
+        val path = Paths.get("src/test/kotlin/day_17/puzzle_layout.txt")
+        val smallLayout = PuzzleInputReader.readStringListFromFile(path)
+
+        val cubeGrid = loadCubeGridFromLayout(smallLayout)
+        repeat(6) {
+            cubeGrid.advanceCycle()
+        }
+        assertEquals(291, cubeGrid.getActiveCubeCount())
+    }
 }
