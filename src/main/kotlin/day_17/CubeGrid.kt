@@ -94,7 +94,7 @@ fun loadCubeGridFromLayout(layout: List<String>): CubeGrid{
 
 fun isNeighborToCube(cube1: Cube, cube2: Cube): Boolean {
     if(cube1.x == cube2.x && cube1.y == cube2.y &&
-            cube2.z == cube2.z) {
+            cube1.z == cube2.z) {
         return false
     }
     if (abs(cube1.x - cube2.x) > 1) return false
