@@ -70,8 +70,10 @@ class CubeGridTests {
         val smallLayout = PuzzleInputReader.readStringListFromFile(path)
 
         val cubeGrid = loadCubeGridFromLayout(smallLayout)
+        cubeGrid.displayLayers()
         repeat(3) {
             cubeGrid.advanceCycle()
+            cubeGrid.displayLayers()
         }
         assertEquals(38, cubeGrid.getActiveCubeCount())
     }

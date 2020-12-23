@@ -29,6 +29,29 @@ class CubeGrid(private var cubeList: List<Cube>) {
         return cubeList.count { it.active }
     }
 
+    fun displayLayers() {
+        val minZ = cubeList.minOf { it.z }
+        val maxZ = cubeList.maxOf { it.z }
+        (minZ..maxZ).map { z ->
+            println("Z: $z")
+            val minY = cubeList.minOf { it.y }
+            val maxY = cubeList.maxOf { it.y }
+            (minY..maxY).map { y ->
+                val minX = cubeList.minOf { it.x }
+                val maxX = cubeList.maxOf { it.x }
+                (minX..maxX).map { x ->
+                    val isActive = cubeList.count { it.x == x && it.y == y && it.z == z && it.active } == 1
+                    if(isActive){
+                        print("#")
+                    } else {
+                        print(".")
+                    }
+                }
+                println()
+            }
+        }
+    }
+
     private fun getActiveNeighborCount(cube: Cube): Int{
         return cubeList.count { isNeighborToCube(cube,it) && it.active }
     }
