@@ -1,6 +1,7 @@
 package day_17
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -94,6 +95,7 @@ class CubeGridTests {
     }
 
     @Test
+    @Tag("slow")
     fun `Problem 17 Part 1`(){
         val path = Paths.get("src/test/kotlin/day_17/puzzle_layout.txt")
         val smallLayout = PuzzleInputReader.readStringListFromFile(path)
@@ -118,6 +120,7 @@ class CubeGridTests {
     }
 
     @Test
+    @Tag("Slow")
     fun `Problem 17 Part 2`(){
         val path = Paths.get("src/test/kotlin/day_17/puzzle_layout.txt")
         val smallLayout = PuzzleInputReader.readStringListFromFile(path)
