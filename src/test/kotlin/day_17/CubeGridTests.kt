@@ -104,4 +104,16 @@ class CubeGridTests {
         }
         assertEquals(291, cubeGrid.getActiveCubeCount())
     }
+
+    @Test
+    fun `Hypercube Grid Advanced Six Cycles Should Have 848 Active Cubes`(){
+        val path = Paths.get("src/test/kotlin/day_17/small_layout.txt")
+        val smallLayout = PuzzleInputReader.readStringListFromFile(path)
+
+        val cubeGrid = loadHypercubeGridFromLayout(smallLayout)
+        repeat(6) {
+            cubeGrid.advanceCycle()
+        }
+        assertEquals(848, cubeGrid.getActiveCubeCount())
+    }
 }
