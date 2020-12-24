@@ -95,7 +95,6 @@ class CubeGridTests {
     }
 
     @Test
-    @Tag("slow")
     fun `Problem 17 Part 1`(){
         val path = Paths.get("src/test/kotlin/day_17/puzzle_layout.txt")
         val smallLayout = PuzzleInputReader.readStringListFromFile(path)
@@ -108,6 +107,7 @@ class CubeGridTests {
     }
 
     @Test
+    @Tag("slow")
     fun `Hypercube Grid Advanced Six Cycles Should Have 848 Active Cubes`(){
         val path = Paths.get("src/test/kotlin/day_17/small_layout.txt")
         val smallLayout = PuzzleInputReader.readStringListFromFile(path)
