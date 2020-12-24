@@ -120,7 +120,7 @@ class CubeGridTests {
     }
 
     @Test
-    @Tag("Slow")
+    @Tag("slow")
     fun `Problem 17 Part 2`(){
         val path = Paths.get("src/test/kotlin/day_17/puzzle_layout.txt")
         val smallLayout = PuzzleInputReader.readStringListFromFile(path)
